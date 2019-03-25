@@ -1,6 +1,8 @@
 package comp1110.ass2.gui;
 
+import comp1110.ass2.Board;
 import comp1110.ass2.RailroadInk;
+import comp1110.ass2.Tile;
 
 public class Game {
     public static void main(String[] args) {
