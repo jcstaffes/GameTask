@@ -15,7 +15,25 @@ public class RailroadInk {
      */
     public static boolean isTilePlacementWellFormed(String tilePlacementString) {
         // FIXME Task 2: determine whether a tile placement is well-formed
-        return false;
+        char []t=tilePlacementString.toCharArray();
+        if(tilePlacementString.length()==5){
+            if(t[0]=='A'||t[0]=='S'){
+                if(t[1]>='0'&&t[1]<='6'&&t[2]>='A'&&t[2]<='G'&&t[3]>='0'&&t[3]<='6'&&t[4]>='0'&&t[4]<='7')
+                    return true;
+                else
+                   return false;
+            }
+            else if(t[0]=='B'){
+                if(t[1]>='0'&&t[1]<='6'&&t[2]>='A'&&t[2]<='G'&&t[3]>='0'&&t[3]<='6'&&t[4]>='0'&&t[4]<='7')
+                   return true;
+                else
+                   return false;
+            }
+            else
+               return false;
+        }
+        else
+            return false;
     }
 
     /**
@@ -29,7 +47,20 @@ public class RailroadInk {
      */
     public static boolean isBoardStringWellFormed(String boardString) {
         // FIXME Task 3: determine whether a board string is well-formed
-        return false;
+        char []t=boardString.toCharArray();
+        int sum=0;
+        if(boardString.length()%5==0&&boardString.length()<=155&&boardString.length()>=5){
+        for(int i=0;i<boardString.length();i+=5){
+            if(t[i]=='S')
+                sum++;
+        }
+        if(sum>3)
+                return false;
+        else
+        return true;
+        }
+        else
+                return false;
     }
 
 
@@ -46,6 +77,8 @@ public class RailroadInk {
      */
     public static boolean areConnectedNeighbours(String tilePlacementStringA, String tilePlacementStringB) {
         // FIXME Task 5: determine whether neighbouring placements are connected
+        char []t1=tilePlacementStringA.toCharArray();
+        char []t2=tilePlacementStringB.toCharArray();
         return false;
     }
 
