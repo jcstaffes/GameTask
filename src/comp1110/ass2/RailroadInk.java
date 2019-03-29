@@ -18,13 +18,13 @@ public class RailroadInk {
         char []t=tilePlacementString.toCharArray();
         if(tilePlacementString.length()==5){
             if(t[0]=='A'||t[0]=='S'){
-                if(t[1]>='0'&&t[1]<='6'&&t[2]>='A'&&t[2]<='G'&&t[3]>='0'&&t[3]<='6'&&t[4]>='0'&&t[4]<='7')
+                if(t[1]>='0'&&t[1]<='5'&&t[2]>='A'&&t[2]<='G'&&t[3]>='0'&&t[3]<='6'&&t[4]>='0'&&t[4]<='7')
                     return true;
                 else
                    return false;
             }
             else if(t[0]=='B'){
-                if(t[1]>='0'&&t[1]<='6'&&t[2]>='A'&&t[2]<='G'&&t[3]>='0'&&t[3]<='6'&&t[4]>='0'&&t[4]<='7')
+                if(t[1]>='0'&&t[1]<='2'&&t[2]>='A'&&t[2]<='G'&&t[3]>='0'&&t[3]<='6'&&t[4]>='0'&&t[4]<='7')
                    return true;
                 else
                    return false;
@@ -47,6 +47,8 @@ public class RailroadInk {
      */
     public static boolean isBoardStringWellFormed(String boardString) {
         // FIXME Task 3: determine whether a board string is well-formed
+        if(boardString==null)
+            return false;
         char []t=boardString.toCharArray();
         int sum=0;
         if(boardString.length()%5==0&&boardString.length()<=155&&boardString.length()>=5){
