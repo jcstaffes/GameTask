@@ -1,11 +1,6 @@
 package comp1110.ass2;
 
 public class Board {
-    public String emptyboard;
-    public static int emptyBpard(int n){
-        return '0';
-    }
-
 //      use this class to complete three steps:
 //         1. create an empty board
 //         2. define the exit
@@ -23,50 +18,51 @@ public class Board {
         int offset = 0;
         switch (c) {
             case '0':
-                offset = 66;
+                offset = 0;
                 break;
             case '1':
-                offset = 166;
+                offset = 100;
                 break;
             case '2':
-                offset = 266;
+                offset = 200;
                 break;
             case '3':
-                offset = 366;
+                offset = 300;
                 break;
             case '4':
-                offset = 466;
+                offset = 400;
                 break;
             case '5':
-                offset = 566;
+                offset = 500;
                 break;
             case '6':
-                offset = 666;
+                offset = 600;
+                break;
+            case '7':
+                offset = 700;
                 break;
             case 'A':
-                offset = 33;
+                offset = 0;
                 break;
             case 'B':
-                offset = 133;
+                offset = 100;
                 break;
             case 'C':
-                offset = 233;
+                offset = 200;
                 break;
             case 'D':
-                offset = 333;
+                offset = 300;
                 break;
             case 'E':
-                offset = 433;
+                offset = 400;
                 break;
             case 'F':
-                offset = 533;
+                offset = 500;
                 break;
             case 'G':
-                offset = 633;
+                offset = 600;
                 break;
         }
         return offset;
     }
-
-    public String exit;
 }
