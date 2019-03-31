@@ -1,7 +1,9 @@
 package comp1110.ass2;
 
 import comp1110.ass2.gui.Game;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import comp1110.ass2.Board;
 
 public class Tile {
     public String tileID;
@@ -31,29 +33,45 @@ public class Tile {
 
     /**
      * Create the image view for tile
+     * @author Brodie Osborne (u5828619)
      */
     public static ImageView getImage(Tile tile){
-        //Get image from file, turn into imageview and return
-        return null;
+        Image originalImage = new Image("comp1110/ass2/gui/assets/" + tile.tileID + ".png");
+        ImageView iv = new ImageView();
+        iv.setImage(originalImage);
+        return rotateImagee(tile,iv);
         }
 
     /**
      * Determine the rotation that is required for the ImageView
      * @param orientation the orientation
+     * @author Brodie Osborne (u5828619)
      */
     private static int setRotation(int orientation){
-        //translates the rotation into an orientation in degrees
-        return orientation;
+        int degree = 0;
+        switch (orientation) {
+            case 0:
+                degree = 0;
+                break;
+            case 1:
+                degree = 90;
+                break;
+            case 2:
+                degree = 180;
+                break;
+            case 3:
+                degree = 270;
+                break;
+        }
+        return degree;
     }
 
     /**
      * Rotate or Flip the imageView
      * @param iv the image view of the Tile
+     * @author Brodie Osborne (u5828619)
      */
     private static ImageView rotateImagee(Tile tile, ImageView iv){
-        //Rotate image view
-        //Flip if necessary
-
         return iv;
     }
 
