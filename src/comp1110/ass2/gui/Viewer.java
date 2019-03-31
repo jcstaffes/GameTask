@@ -45,8 +45,11 @@ public class Viewer extends Application {
     TextField textField;
 
 
+    //TODO PLACE THIS METHOD INTO RAILROADINK
     //	Break placement string into piece strings for use
-    private List breakPlacementStringToPieces(String placement) {
+
+    //Turns ABCDEFGHIJ into ['ABCDE','FGHIJ']
+    public static List breakPlacementStringToPieces(String placement) {
         int count = 0;
         int index = 0;
         int len = placement.length();
