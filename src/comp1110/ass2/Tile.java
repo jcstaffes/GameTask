@@ -31,14 +31,18 @@ public class Tile {
         this.imgview = getImage(this);
     }
 
+    /**
+     * Creates a tile object from a valid placement string
+     *
+     * @param tileString the placement string for the given tile
+     * @author Brodie Osborne (u5828619)
+     */
     public static Tile makeTileFromString(String tileString){
         String tileID = "" + tileString.charAt(1) + tileString.charAt(2);
         char row = tileString.charAt(3);
         char col = tileString.charAt(4);
         int orient = Integer.parseInt(String.valueOf(tileString.charAt(5)));
-
-        Tile tile = new Tile(tileID, orient, col, row);
-        return tile;
+        return new Tile(tileID, orient, col, row);
     }
 
     /**
