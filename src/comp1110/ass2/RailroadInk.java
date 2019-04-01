@@ -247,7 +247,7 @@ public class RailroadInk {
         int amount = (boardString.length()/5);
 
         if (isBoardStringWellFormed(boardString)){
-            if (isTilePlacementWellFormed(boardString)){
+           // if (isTilePlacementWellFormed(boardString)){
                 loop2:
                 for (int i = 0;i<(amount-1);i++){
                     loop1:
@@ -255,17 +255,15 @@ public class RailroadInk {
                         /**if (boardString.charAt(2+i*5)==boardString.charAt(2+i*5+j*5)&&boardString.charAt(3+i*5)==boardString.charAt(3+i*5+j*5)){
                             break loop2;
                         }
-                        else {
+                        else {**/
                             String tile1 = allTiles.get(i).toString();
-                            String tile2 = allTiles.get(i+j).toString();**/
-                        String tile1 = boardString.substring(0+i*5,5+i*5);
-                        String tile2 = boardString.substring((0+(i+j)*5),(5+(i+j)*5));
+                            String tile2 = allTiles.get(i+j).toString();
+                            String con = tileReset(tile1);
                             if (areConnectedNeighbours(tile1,tile2)){
                                 return true;
                             }
                             else {
                                 //String tile3 = allTiles.get(i).toString();
-                                String con = tileReset(tile1);
                                 char ro = tile1.charAt(2);
                                 char co = tile1.charAt(3);
                                 if (ro=='A'&&co=='1'){
@@ -306,7 +304,7 @@ public class RailroadInk {
                                 }
                             }
                         //}
-                    }
+                   // }
                 }
             }
         }
@@ -374,13 +372,6 @@ public class RailroadInk {
         return -1;
     }
 
-    public static void main(String[] args) {
-        List allTiles = Viewer.breakPlacementStringToPieces("A4A50A4G12B2G54A1G36");
-        System.out.println(allTiles);
-        String tile1 = allTiles.get(0).toString();
-        String tile2 = allTiles.get(0+2).toString();
-        System.out.println(tile1);
-        System.out.println(tile2);
-    }
+
 }
 
