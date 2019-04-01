@@ -4,12 +4,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import comp1110.ass2.gui.Viewer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tile {
     public String tileID;
     public int rotation;
     public char column;
     public char row;
     public String connections;
+    public List neighbourGrids; //["N","E","S","W"] -> ["xy","xy","xy","xy"]
     public ImageView imgview;
 
 
@@ -28,17 +32,22 @@ public class Tile {
         this.column = column;
         this.row = row;
         this.connections = getTile(tileID);
+        this.neighbourGrids = getNeighbours(row, column);
         this.imgview = getImage(this);
     }
 
+    /**
+     * Creates a tile object from a valid placement string
+     *
+     * @param tileString the placement string for the given tile
+     * @author Brodie Osborne (u5828619)
+     */
     public static Tile makeTileFromString(String tileString){
         String tileID = "" + tileString.charAt(1) + tileString.charAt(2);
         char row = tileString.charAt(3);
         char col = tileString.charAt(4);
         int orient = Integer.parseInt(String.valueOf(tileString.charAt(5)));
-
-        Tile tile = new Tile(tileID, orient, col, row);
-        return tile;
+        return new Tile(tileID, orient, col, row);
     }
 
     /**
@@ -46,131 +55,172 @@ public class Tile {
      *
      * @author Jiamin Dai (u6801714)
      */
+    //ACTUALLY FROM PLACEMENT STRING - id------
     public String getTile(String id) {
-        char[] t1 = id.toCharArray();
-        String str3 = "";
-        if (t1[0] == 'S')
-            if (t1[1] == '0')
-                if (t1[4] == '0' || t1[4] == '4')
-                    str3 = "HHRH";
-                else if (t1[4] == '1' || t1[4] == '5')
-                    str3 = "HRHH";
-                else if (t1[4] == '2' || t1[4] == '6')
-                    str3 = "RHHH";
-                else
-                    str3 = "HHHR";
-            else if (t1[1] == '1')
-                if (t1[4] == '0' || t1[4] == '4')
-                    str3 = "HRRR";
-                else if (t1[4] == '1' || t1[4] == '5')
-                    str3 = "RRRH";
-                else if (t1[4] == '2' || t1[4] == '6')
-                    str3 = "RRHR";
-                else
-                    str3 = "RHRR";
-            else if (t1[1] == '2')
-                str3 = "HHHH";
-            else if (t1[1] == '3')
-                str3 = "RRRR";
-            else if (t1[1] == '4')
-                if (t1[4] == '0' || t1[4] == '7')
-                    str3 = "HHRR";
-                else if (t1[4] == '1' || t1[4] == '4')
-                    str3 = "HRRH";
-                else if (t1[4] == '2' || t1[4] == '5')
-                    str3 = "RRHH";
-                else
-                    str3 = "RHHR";
-            else if (t1[4] % 2 == 0)
-                str3 = "HRHR";
-            else
-                str3 = "RHRH";
-        else if (t1[0] == 'A')
-            if (t1[1] == '0')
-                if (t1[4] == '0' || t1[4] == '7')
-                    str3 = "RRNN";
-                else if (t1[4] == '1' || t1[4] == '4')
-                    str3 = "RNNR";
-                else if (t1[4] == '2' || t1[4] == '5')
-                    str3 = "NNRR";
-                else
-                    str3 = "NRRN";
-            else if (t1[1] == '1')
-                if (t1[4] % 2 == 0)
-                    str3 = "RNRN";
-                else
-                    str3 = "NRNR";
-            else if (t1[1] == '2')
-                if (t1[4] == '0' || t1[4] == '6')
-                    str3 = "RNRR";
-                else if (t1[4] == '1' || t1[4] == '7')
-                    str3 = "NRRR";
-                else if (t1[4] == '2' || t1[4] == '4')
-                    str3 = "RRRN";
-                else
-                    str3 = "RRNR";
-            else if (t1[1] == '3')
-                if (t1[4] == '0' || t1[4] == '6')
-                    str3 = "HNHH";
-                else if (t1[4] == '1' || t1[4] == '7')
-                    str3 = "NHHH";
-                else if (t1[4] == '2' || t1[4] == '4')
-                    str3 = "HHHN";
-                else
-                    str3 = "HHNH";
-            else if (t1[1] == '4')
-                if (t1[4] % 2 == 0)
-                    str3 = "HNHN";
-                else
-                    str3 = "NHNH";
-            else if (t1[4] == '0' || t1[4] == '7')
-                str3 = "HHNN";
-            else if (t1[4] == '1' || t1[4] == '4')
-                str3 = "HNNH";
-            else if (t1[4] == '2' || t1[4] == '5')
-                str3 = "NNHH";
-            else
-                str3 = "NHHN";
-        else if (t1[1] == '0')
-            if (t1[4] == '0' || t1[4] == '4')
-                str3 = "HNRN";
-            else if (t1[4] == '1' || t1[4] == '5')
-                str3 = "NRNH";
-            else if (t1[4] == '2' || t1[4] == '6')
-                str3 = "RNHN";
-            else
-                str3 = "NHNR";
-        else if (t1[1] == '2')
-            if (t1[4] % 2 == 0)
-                str3 = "HRHR";
-            else
-                str3 = "RHRH";
-        else if (t1[4] == '0')
-            str3 = "HNNR";
-        else if (t1[4] == '1')
-            str3 = "NNRH";
-        else if (t1[4] == '2')
-            str3 = "NRHN";
-        else if (t1[4] == '3')
-            str3 = "RHNN";
-        else if (t1[4] == '4')
-            str3 = "HRNN";
-        else if (t1[4] == '5')
-            str3 = "RNNH";
-        else if (t1[4] == '6')
-            str3 = "NNHR";
-        else
-            str3 = "NHRN";
-        return str3;
+//        char[] t1 = id.toCharArray();
+//        String str3 = "";
+//        if (t1[0] == 'S')
+//            if (t1[1] == '0')
+//                if (t1[4] == '0' || t1[4] == '4')
+//                    str3 = "HHRH";
+//                else if (t1[4] == '1' || t1[4] == '5')
+//                    str3 = "HRHH";
+//                else if (t1[4] == '2' || t1[4] == '6')
+//                    str3 = "RHHH";
+//                else
+//                    str3 = "HHHR";
+//            else if (t1[1] == '1')
+//                if (t1[4] == '0' || t1[4] == '4')
+//                    str3 = "HRRR";
+//                else if (t1[4] == '1' || t1[4] == '5')
+//                    str3 = "RRRH";
+//                else if (t1[4] == '2' || t1[4] == '6')
+//                    str3 = "RRHR";
+//                else
+//                    str3 = "RHRR";
+//            else if (t1[1] == '2')
+//                str3 = "HHHH";
+//            else if (t1[1] == '3')
+//                str3 = "RRRR";
+//            else if (t1[1] == '4')
+//                if (t1[4] == '0' || t1[4] == '7')
+//                    str3 = "HHRR";
+//                else if (t1[4] == '1' || t1[4] == '4')
+//                    str3 = "HRRH";
+//                else if (t1[4] == '2' || t1[4] == '5')
+//                    str3 = "RRHH";
+//                else
+//                    str3 = "RHHR";
+//            else if (t1[4] % 2 == 0)
+//                str3 = "HRHR";
+//            else
+//                str3 = "RHRH";
+//        else if (t1[0] == 'A')
+//            if (t1[1] == '0')
+//                if (t1[4] == '0' || t1[4] == '7')
+//                    str3 = "RRNN";
+//                else if (t1[4] == '1' || t1[4] == '4')
+//                    str3 = "RNNR";
+//                else if (t1[4] == '2' || t1[4] == '5')
+//                    str3 = "NNRR";
+//                else
+//                    str3 = "NRRN";
+//            else if (t1[1] == '1')
+//                if (t1[4] % 2 == 0)
+//                    str3 = "RNRN";
+//                else
+//                    str3 = "NRNR";
+//            else if (t1[1] == '2')
+//                if (t1[4] == '0' || t1[4] == '6')
+//                    str3 = "RNRR";
+//                else if (t1[4] == '1' || t1[4] == '7')
+//                    str3 = "NRRR";
+//                else if (t1[4] == '2' || t1[4] == '4')
+//                    str3 = "RRRN";
+//                else
+//                    str3 = "RRNR";
+//            else if (t1[1] == '3')
+//                if (t1[4] == '0' || t1[4] == '6')
+//                    str3 = "HNHH";
+//                else if (t1[4] == '1' || t1[4] == '7')
+//                    str3 = "NHHH";
+//                else if (t1[4] == '2' || t1[4] == '4')
+//                    str3 = "HHHN";
+//                else
+//                    str3 = "HHNH";
+//            else if (t1[1] == '4')
+//                if (t1[4] % 2 == 0)
+//                    str3 = "HNHN";
+//                else
+//                    str3 = "NHNH";
+//            else if (t1[4] == '0' || t1[4] == '7')
+//                str3 = "HHNN";
+//            else if (t1[4] == '1' || t1[4] == '4')
+//                str3 = "HNNH";
+//            else if (t1[4] == '2' || t1[4] == '5')
+//                str3 = "NNHH";
+//            else
+//                str3 = "NHHN";
+//        else if (t1[1] == '0')
+//            if (t1[4] == '0' || t1[4] == '4')
+//                str3 = "HNRN";
+//            else if (t1[4] == '1' || t1[4] == '5')
+//                str3 = "NRNH";
+//            else if (t1[4] == '2' || t1[4] == '6')
+//                str3 = "RNHN";
+//            else
+//                str3 = "NHNR";
+//        else if (t1[1] == '2')
+//            if (t1[4] % 2 == 0)
+//                str3 = "HRHR";
+//            else
+//                str3 = "RHRH";
+//        else if (t1[4] == '0')
+//            str3 = "HNNR";
+//        else if (t1[4] == '1')
+//            str3 = "NNRH";
+//        else if (t1[4] == '2')
+//            str3 = "NRHN";
+//        else if (t1[4] == '3')
+//            str3 = "RHNN";
+//        else if (t1[4] == '4')
+//            str3 = "HRNN";
+//        else if (t1[4] == '5')
+//            str3 = "RNNH";
+//        else if (t1[4] == '6')
+//            str3 = "NNHR";
+//        else
+//            str3 = "NHRN";
+        return id;
     }
 
+    public List getNeighbours(char row, char col) {
+        List<String> neighbours = new ArrayList<>();
+//        Char N E S W and add them all together in the end
+        String rows = "ABCDEFG";
+        String cols = "0123456";
+        String N = "FF";
+        String E = "FF";
+        String S = "FF";
+        String W = "FF";
+
+        //Work out North
+
+        if (row != 'A'){
+            char a = rows.charAt(rows.indexOf(row)-1);
+            N = "" + a + col;
+        }
+
+        //Work out East
+        if (col != '6'){
+            char b = cols.charAt(cols.indexOf(col)+1);
+            E = "" + row + b;
+        }
+
+        //Work out South
+        if (row != 'G'){
+            char c = rows.charAt(rows.indexOf(row)+1);
+            S = "" + c + col;
+        }
+
+        //Work out West
+        if (col != '0'){
+            char d = cols.charAt(cols.indexOf(col)-1);
+            W = "" + row + d;
+        }
+        neighbours.add(0,N);
+        neighbours.add(1,E);
+        neighbours.add(2,S);
+        neighbours.add(3,W);
+        return neighbours;
+    }
 
     /**
      * Create the image view for tile
      *
      * @author Brodie Osborne (u5828619)
      */
-    public static ImageView getImage(Tile tile) {
+    private static ImageView getImage(Tile tile) {
         Image originalImage = new Image("comp1110/ass2/gui/assets/" + tile.tileID + ".png");
         ImageView iv = new ImageView();
         iv.setImage(originalImage);
