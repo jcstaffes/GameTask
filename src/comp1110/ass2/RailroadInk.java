@@ -1,6 +1,10 @@
 package comp1110.ass2;
 
+import comp1110.ass2.gui.Viewer;
+
+import java.awt.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class RailroadInk {
     /**
@@ -239,7 +243,82 @@ public class RailroadInk {
      */
     public static boolean isValidPlacementSequence(String boardString) {
         // FIXME Task 6: determine whether the given placement sequence is valid
-        return false;
+        //List allTiles = Viewer.breakPlacementStringToPieces(boardString);
+        int amount = (boardString.length()/5);
+        char ro1 = boardString.charAt(2);
+        char co1 = boardString.charAt(3);
+
+        if (isBoardStringWellFormed(boardString)){
+            if (!((ro1=='A'&&co1=='1')||(ro1=='A'&&co1=='3')||(ro1=='A'&&co1=='5')||(ro1=='B'&&co1=='0')||(ro1=='B'&&co1=='6')||(ro1=='D'&&co1=='0')||(ro1=='D'&&co1=='6')||(ro1=='F'&&co1=='0')||(ro1=='F'&&co1=='6')||(ro1=='G'&&co1=='1')||(ro1=='G'&&co1=='3')||(ro1=='G'&&co1=='5'))){
+                return false;
+            }
+                loop2:
+                for (int i = 0;i<(amount);i++){
+                    loop1:
+                    for (int j = i;j>=0;j--){
+
+                            String tile1 = boardString.substring((0+i*5),(5+i*5));
+                            String tile2 = boardString.substring((0+j*5),(5+j*5));
+                            String con = tileReset(tile1);
+                            char ro = tile1.charAt(2);
+                            char co = tile1.charAt(3);
+                            char ro2 = tile2.charAt(2);
+                            char co2 = tile2.charAt(3);
+                        if (isTilePlacementWellFormed(tile1)){
+
+                                //String tile3 = allTiles.get(i).toString();
+
+                                if (ro=='A'&&co=='1'){
+                                    if (con.charAt(0)=='R') return false;
+                                }
+                                else if (ro=='A'&&co=='3'){
+                                    if (con.charAt(0)=='H') return false;
+                                }
+                                else if (ro=='A'&&co=='5'){
+                                    if (con.charAt(0)=='R') return false;
+                                }
+                                else if (ro=='B'&&co=='0'){
+                                    if (con.charAt(1)=='H') return false;
+                                }
+                                else if (ro=='B'&&co=='6'){
+                                    if (con.charAt(3)=='H') return false;
+                                }
+                                else if (ro=='D'&&co=='0'){
+                                    if (con.charAt(1)=='R') return false;
+                                }
+                                else if (ro=='D'&&co=='6'){
+                                    if (con.charAt(3)=='R') return false;
+                                }
+                                else if (ro=='F'&&co=='0'){
+                                    if (con.charAt(1)=='H') return false;
+                                }
+                                else if (ro=='F'&&co=='6'){
+                                    if (con.charAt(3)=='H') return false;
+                                }
+                                else if (ro=='G'&&co=='1'){
+                                    if (con.charAt(2)=='R') return false;
+                                }
+                                else if (ro=='G'&&co=='3'){
+                                    if (con.charAt(2)=='H') return false;
+                                }
+                                else if (ro=='G'&&co=='5'){
+                                    if (con.charAt(2)=='R') return false;
+                                }
+                                else if (((ro==ro2)&&(co==(co2-1)))||((ro==ro2)&&(co==(co2+1)))||((co==co2)&&(ro==(ro2-1)))||((co==co2)&&(ro==(ro2+1)))){
+                                    if (areConnectedNeighbours(tile1,tile2)){
+                                        break loop1;
+                                    }
+                                }
+                                else {
+                                    return false;
+                                }
+                        }
+                    }
+                }
+        }
+
+
+        return true;
     }
 
     /**
@@ -300,5 +379,7 @@ public class RailroadInk {
         // FIXME Task 12: compute the total score including bonus points
         return -1;
     }
+
+
 }
 
