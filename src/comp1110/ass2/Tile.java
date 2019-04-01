@@ -12,7 +12,7 @@ public class Tile {
     public int rotation;
     public char column;
     public char row;
-    public String connections;
+    public String connection;
     public List neighbourGrids; //["N","E","S","W"] -> ["xy","xy","xy","xy"]
     public ImageView imgview;
 
@@ -31,7 +31,7 @@ public class Tile {
         this.rotation = rotation;
         this.column = column;
         this.row = row;
-        this.connections = getTile(tileID);
+        this.connection = getConnection(tileID, rotation);
         this.neighbourGrids = getNeighbours(row, column);
         this.imgview = getImage(this);
     }
@@ -42,7 +42,7 @@ public class Tile {
      * @param tileString the placement string for the given tile
      * @author Brodie Osborne (u5828619)
      */
-    public static Tile makeTileFromString(String tileString){
+    public static Tile makeTileFromString(String tileString) {
         String tileID = "" + tileString.charAt(1) + tileString.charAt(2);
         char row = tileString.charAt(3);
         char col = tileString.charAt(4);
@@ -51,129 +51,155 @@ public class Tile {
     }
 
     /**
-     * Returns the connections for the tile
-     *
-     * @author Jiamin Dai (u6801714)
+     * Returns the connections for the tile in format "1234"
+     * where:  and H stands for Highway, R for Railway and N for nothing/blank
+     *      1
+     *    2| |4
+     *      3
+
+     * @author Jiamin Dai (u6801714) & Reformatted by Brodie Osborne (u5828619)
      */
-    //ACTUALLY FROM PLACEMENT STRING - id------
-    public String getTile(String id) {
-//        char[] t1 = id.toCharArray();
-//        String str3 = "";
-//        if (t1[0] == 'S')
-//            if (t1[1] == '0')
-//                if (t1[4] == '0' || t1[4] == '4')
-//                    str3 = "HHRH";
-//                else if (t1[4] == '1' || t1[4] == '5')
-//                    str3 = "HRHH";
-//                else if (t1[4] == '2' || t1[4] == '6')
-//                    str3 = "RHHH";
-//                else
-//                    str3 = "HHHR";
-//            else if (t1[1] == '1')
-//                if (t1[4] == '0' || t1[4] == '4')
-//                    str3 = "HRRR";
-//                else if (t1[4] == '1' || t1[4] == '5')
-//                    str3 = "RRRH";
-//                else if (t1[4] == '2' || t1[4] == '6')
-//                    str3 = "RRHR";
-//                else
-//                    str3 = "RHRR";
-//            else if (t1[1] == '2')
-//                str3 = "HHHH";
-//            else if (t1[1] == '3')
-//                str3 = "RRRR";
-//            else if (t1[1] == '4')
-//                if (t1[4] == '0' || t1[4] == '7')
-//                    str3 = "HHRR";
-//                else if (t1[4] == '1' || t1[4] == '4')
-//                    str3 = "HRRH";
-//                else if (t1[4] == '2' || t1[4] == '5')
-//                    str3 = "RRHH";
-//                else
-//                    str3 = "RHHR";
-//            else if (t1[4] % 2 == 0)
-//                str3 = "HRHR";
-//            else
-//                str3 = "RHRH";
-//        else if (t1[0] == 'A')
-//            if (t1[1] == '0')
-//                if (t1[4] == '0' || t1[4] == '7')
-//                    str3 = "RRNN";
-//                else if (t1[4] == '1' || t1[4] == '4')
-//                    str3 = "RNNR";
-//                else if (t1[4] == '2' || t1[4] == '5')
-//                    str3 = "NNRR";
-//                else
-//                    str3 = "NRRN";
-//            else if (t1[1] == '1')
-//                if (t1[4] % 2 == 0)
-//                    str3 = "RNRN";
-//                else
-//                    str3 = "NRNR";
-//            else if (t1[1] == '2')
-//                if (t1[4] == '0' || t1[4] == '6')
-//                    str3 = "RNRR";
-//                else if (t1[4] == '1' || t1[4] == '7')
-//                    str3 = "NRRR";
-//                else if (t1[4] == '2' || t1[4] == '4')
-//                    str3 = "RRRN";
-//                else
-//                    str3 = "RRNR";
-//            else if (t1[1] == '3')
-//                if (t1[4] == '0' || t1[4] == '6')
-//                    str3 = "HNHH";
-//                else if (t1[4] == '1' || t1[4] == '7')
-//                    str3 = "NHHH";
-//                else if (t1[4] == '2' || t1[4] == '4')
-//                    str3 = "HHHN";
-//                else
-//                    str3 = "HHNH";
-//            else if (t1[1] == '4')
-//                if (t1[4] % 2 == 0)
-//                    str3 = "HNHN";
-//                else
-//                    str3 = "NHNH";
-//            else if (t1[4] == '0' || t1[4] == '7')
-//                str3 = "HHNN";
-//            else if (t1[4] == '1' || t1[4] == '4')
-//                str3 = "HNNH";
-//            else if (t1[4] == '2' || t1[4] == '5')
-//                str3 = "NNHH";
-//            else
-//                str3 = "NHHN";
-//        else if (t1[1] == '0')
-//            if (t1[4] == '0' || t1[4] == '4')
-//                str3 = "HNRN";
-//            else if (t1[4] == '1' || t1[4] == '5')
-//                str3 = "NRNH";
-//            else if (t1[4] == '2' || t1[4] == '6')
-//                str3 = "RNHN";
-//            else
-//                str3 = "NHNR";
-//        else if (t1[1] == '2')
-//            if (t1[4] % 2 == 0)
-//                str3 = "HRHR";
-//            else
-//                str3 = "RHRH";
-//        else if (t1[4] == '0')
-//            str3 = "HNNR";
-//        else if (t1[4] == '1')
-//            str3 = "NNRH";
-//        else if (t1[4] == '2')
-//            str3 = "NRHN";
-//        else if (t1[4] == '3')
-//            str3 = "RHNN";
-//        else if (t1[4] == '4')
-//            str3 = "HRNN";
-//        else if (t1[4] == '5')
-//            str3 = "RNNH";
-//        else if (t1[4] == '6')
-//            str3 = "NNHR";
-//        else
-//            str3 = "NHRN";
-        return id;
+
+    private String getConnection(String id, int r) {
+        String connection = "";
+        switch (id) {
+            case "S0":
+                if (r == 0 || r == 4)
+                    connection = "HHRH";
+                else if (r == 1 || r == 5)
+                    connection = "HRHH";
+                else if (r == 2 || r == 6)
+                    connection = "RHHH";
+                else
+                    connection = "HHHR";
+                break;
+            case "S1":
+                if (r == '0' || r == '4')
+                    connection = "HRRR";
+                else if (r == '1' || r == '5')
+                    connection = "RRRH";
+                else if (r == '2' || r == '6')
+                    connection = "RRHR";
+                else
+                    connection = "RHRR";
+                break;
+            case "S2":
+                connection = "HHHH";
+                break;
+            case "S3":
+                connection = "RRRR";
+                break;
+            case "S4":
+                if (r == '0' || r == '7')
+                    connection = "HHRR";
+                else if (r == '1' || r == '4')
+                    connection = "HRRH";
+                else if (r == '2' || r == '5')
+                    connection = "RRHH";
+                else
+                    connection = "RHHR";
+                break;
+            case "S5":
+                if (r % 2 == 0)
+                    connection = "HRHR";
+                else
+                    connection = "RHRH";
+                break;
+            case "A0":
+                if (r == '0' || r == '7')
+                    connection = "RRNN";
+                else if (r == '1' || r == '4')
+                    connection = "RNNR";
+                else if (r == '2' || r == '5')
+                    connection = "NNRR";
+                else
+                    connection = "NRRN";
+                break;
+            case "A1":
+                if (r % 2 == 0)
+                    connection = "RNRN";
+                else
+                    connection = "NRNR";
+                break;
+            case "A2":
+                if (r == '0' || r == '6')
+                    connection = "RNRR";
+                else if (r == '1' || r == '7')
+                    connection = "NRRR";
+                else if (r == '2' || r == '4')
+                    connection = "RRRN";
+                else
+                    connection = "RRNR";
+                break;
+            case "A3":
+                if (r == '0' || r == '6')
+                    connection = "HNHH";
+                else if (r == '1' || r == '7')
+                    connection = "NHHH";
+                else if (r == '2' || r == '4')
+                    connection = "HHHN";
+                else
+                    connection = "HHNH";
+                break;
+            case "A4":
+                if (r % 2 == 0)
+                    connection = "HNHN";
+                else
+                    connection = "NHNH";
+                break;
+            case "A5":
+                if (r == '0' || r == '7')
+                    connection = "HHNN";
+                else if (r == '1' || r == '4')
+                    connection = "HNNH";
+                else if (r == '2' || r == '5')
+                    connection = "NNHH";
+                else
+                    connection = "NHHN";
+                break;
+            case "B0":
+                if (r == '0' || r == '4')
+                    connection = "HNRN";
+                else if (r == '1' || r == '5')
+                    connection = "NRNH";
+                else if (r == '2' || r == '6')
+                    connection = "RNHN";
+                else
+                    connection = "NHNR";
+                break;
+            case "B1":
+                if (r == '0')
+                    connection = "HNNR";
+                else if (r == '1')
+                    connection = "NNRH";
+                else if (r == '2')
+                    connection = "NRHN";
+                else if (r == '3')
+                    connection = "RHNN";
+                else if (r == '4')
+                    connection = "HRNN";
+                else if (r == '5')
+                    connection = "RNNH";
+                else if (r == '6')
+                    connection = "NNHR";
+                else
+                    connection = "NHRN";
+                break;
+            case "B2":
+                if (r % 2 == 0)
+                    connection = "HRHR";
+                else
+                    connection = "RHRH";
+                break;
+        }
+        return connection;
     }
 
+    /**
+     * Create a list of Neighbour coordinates (row,col)
+     * @return points North, East, South, Wast "rc". If any point is FF means it doesn't exist.
+     * @author Brodie Osborne (u5828619)
+     */
     public List getNeighbours(char row, char col) {
         List<String> neighbours = new ArrayList<>();
 //        Char N E S W and add them all together in the end
@@ -186,32 +212,32 @@ public class Tile {
 
         //Work out North
 
-        if (row != 'A'){
-            char a = rows.charAt(rows.indexOf(row)-1);
+        if (row != 'A') {
+            char a = rows.charAt(rows.indexOf(row) - 1);
             N = "" + a + col;
         }
 
         //Work out East
-        if (col != '6'){
-            char b = cols.charAt(cols.indexOf(col)+1);
+        if (col != '6') {
+            char b = cols.charAt(cols.indexOf(col) + 1);
             E = "" + row + b;
         }
 
         //Work out South
-        if (row != 'G'){
-            char c = rows.charAt(rows.indexOf(row)+1);
+        if (row != 'G') {
+            char c = rows.charAt(rows.indexOf(row) + 1);
             S = "" + c + col;
         }
 
         //Work out West
-        if (col != '0'){
-            char d = cols.charAt(cols.indexOf(col)-1);
+        if (col != '0') {
+            char d = cols.charAt(cols.indexOf(col) - 1);
             W = "" + row + d;
         }
-        neighbours.add(0,N);
-        neighbours.add(1,E);
-        neighbours.add(2,S);
-        neighbours.add(3,W);
+        neighbours.add(0, N);
+        neighbours.add(1, E);
+        neighbours.add(2, S);
+        neighbours.add(3, W);
         return neighbours;
     }
 
