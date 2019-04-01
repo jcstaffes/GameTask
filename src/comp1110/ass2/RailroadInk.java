@@ -206,7 +206,7 @@ public class RailroadInk {
 
     }
     public static boolean areConnectedNeighbours(String tilePlacementStringA, String tilePlacementStringB) {
-        // FIXME Task 5: determine whether neighbouring placements are connected @author Jiamin Dai(u6801714)
+        //  @author Jiamin Dai(u6801714)
         String str3=RailroadInk.tileReset(tilePlacementStringA);
         String str4=RailroadInk.tileReset(tilePlacementStringB);
         if(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1&&str3.charAt(1)==str4.charAt(3)&&str3.charAt(1)!='N')
