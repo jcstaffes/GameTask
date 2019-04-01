@@ -1,6 +1,10 @@
 package comp1110.ass2;
 
+import comp1110.ass2.gui.Viewer;
+
+import java.awt.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class RailroadInk {
     /**
@@ -239,6 +243,74 @@ public class RailroadInk {
      */
     public static boolean isValidPlacementSequence(String boardString) {
         // FIXME Task 6: determine whether the given placement sequence is valid
+        List allTiles = Viewer.breakPlacementStringToPieces(boardString);
+        int amount = (boardString.length()/5);
+        int r = 2;
+
+        if (isBoardStringWellFormed(boardString)){
+            if (isTilePlacementWellFormed(boardString)){
+                loop2:
+                for (int i = 0;i<amount;i++){
+                    loop1:
+                    for (int j = (amount-i-1);j>0;j--){
+                        if (boardString.charAt(r)==boardString.charAt(r+j*5)&&boardString.charAt(r+1)==boardString.charAt(r+1+j*5)){
+                            break loop2;
+                        }
+                        else {
+                            String tile1 = allTiles.get(j).toString();
+                            String tile2 = allTiles.get(j-1).toString();
+                            if (areConnectedNeighbours(tile1,tile2)){
+                                return true;
+                            }
+                            else {
+                                String tile3 = allTiles.get(i).toString();
+                                String con = tileReset(tile3);
+                                char ro = tile3.charAt(2);
+                                char co = tile3.charAt(3);
+                                if (ro=='A'&&co=='1'){
+                                    if (con.charAt(0)=='H') return true;
+                                }
+                                else if (ro=='A'&&co=='3'){
+                                    if (con.charAt(0)=='R') return true;
+                                }
+                                else if (ro=='A'&&co=='5'){
+                                    if (con.charAt(0)=='H') return true;
+                                }
+                                else if (ro=='B'&&co=='0'){
+                                    if (con.charAt(3)=='R') return true;
+                                }
+                                else if (ro=='B'&&co=='6'){
+                                    if (con.charAt(1)=='R') return true;
+                                }
+                                else if (ro=='D'&&co=='0'){
+                                    if (con.charAt(3)=='H') return true;
+                                }
+                                else if (ro=='D'&&co=='6'){
+                                    if (con.charAt(1)=='H') return true;
+                                }
+                                else if (ro=='F'&&co=='0'){
+                                    if (con.charAt(3)=='R') return true;
+                                }
+                                else if (ro=='F'&&co=='6'){
+                                    if (con.charAt(1)=='R') return true;
+                                }
+                                else if (ro=='G'&&co=='1'){
+                                    if (con.charAt(2)=='H') return true;
+                                }
+                                else if (ro=='G'&&co=='3'){
+                                    if (con.charAt(2)=='R') return true;
+                                }
+                                else if (ro=='G'&&co=='5'){
+                                    if (con.charAt(2)=='H') return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
         return false;
     }
 
