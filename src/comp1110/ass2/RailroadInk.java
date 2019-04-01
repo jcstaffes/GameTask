@@ -81,7 +81,7 @@ public class RailroadInk {
      */
     public static String tileReset(String t){
         char []t1=t.toCharArray();
-        String str3="ABC";
+        String str3="ABCD";
         if (t1[0]=='S')
             if (t1[1]=='0')
                 if(t1[4]=='0'||t1[4]=='4')
@@ -202,57 +202,23 @@ public class RailroadInk {
 
     }
     public static boolean areConnectedNeighbours(String tilePlacementStringA, String tilePlacementStringB) {
-        // FIXME Task 5: determine whether neighbouring placements are connected
-        char []t1=tilePlacementStringA.toCharArray();
-        char []t2=tilePlacementStringB.toCharArray();
+        // FIXME Task 5: determine whether neighbouring placements are connected @author Jiamin Dai(u6801714)
         String str3=RailroadInk.tileReset(tilePlacementStringA);
         String str4=RailroadInk.tileReset(tilePlacementStringB);
-        char []t5=str3.toCharArray();
-        char []t6=str4.toCharArray();
-        if(t5[0]=='H'&&t6[2]=='H')
-            if(t2[2]==t1[2]-1&&t2[3]==t1[3])
+        if(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1&&str3.charAt(1)==str4.charAt(3)&&str3.charAt(1)!='N')
+                return true;
+        else if (tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)+1&&str3.charAt(0)==str4.charAt(2)&&str3.charAt(0)!='N')
+                return true;
+        else if (tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)-1&&str3.charAt(3)==str4.charAt(1)&&str3.charAt(3)!='N')
+                return true;
+        else if(tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)-1&&str3.charAt(2)==str4.charAt(0)&&str3.charAt(2)!='N')
+                return true;
+        else if(str3.charAt(2)==str4.charAt(0)&&str3.charAt(0)==str4.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&str3.charAt(2)!='N'&&str3.charAt(0)!='N'&&(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)+1||tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)-1))
             return true;
-            else
-                return false;
-        else if (t5[1]=='H'&&t6[3]=='H')
-            if(t2[2]==t1[2]&&t2[3]==t1[3]-1)
-                return true;
-            else
-                return false;
-        else if (t5[2]=='H'&&t6[0]=='H')
-            if(t2[2]==t1[2]+1&&t2[3]==t1[3])
-                return true;
-            else
-                return false;
-        else if (t5[3]=='H'&&t6[1]=='H')
-            if(t2[2]==t1[2]&&t2[3]==t1[3]-1)
-                return true;
-            else
-                return false;
-        else if(t5[0]=='R'&&t6[2]=='R')
-            if(t2[2]==t1[2]+1&&t2[3]==t1[3])
-                return true;
-            else
-                return false;
-        else if (t5[1]=='R'&&t6[3]=='R')
-            if(t2[2]==t1[2]&&t2[3]==t1[3]+1)
-                return true;
-            else
-                return false;
-        else if (t5[2]=='R'&&t6[0]=='R')
-            if(t2[2]==t1[2]-1&&t2[3]==t1[3])
-                return true;
-            else
-                return false;
-        else if (t5[3]=='R'&&t6[1]=='R')
-            if(t2[2]==t1[2]&&t2[3]==t1[3]-1)
-                return true;
-            else
-                return false;
+        else if(str3.charAt(1)==str4.charAt(3)&&str3.charAt(3)==str4.charAt(1)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&str3.charAt(1)!='N'&&str3.charAt(4)!='N'&&(tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1||tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)-1))
+            return true;
         else
             return false;
-
-
     }
 
     /**
