@@ -245,28 +245,27 @@ public class RailroadInk {
         // FIXME Task 6: determine whether the given placement sequence is valid
         List allTiles = Viewer.breakPlacementStringToPieces(boardString);
         int amount = (boardString.length()/5);
-        int r = 2;
 
         if (isBoardStringWellFormed(boardString)){
-            if (isTilePlacementWellFormed(boardString)){
+           // if (isTilePlacementWellFormed(boardString)){
                 loop2:
-                for (int i = 0;i<amount;i++){
+                for (int i = 0;i<(amount-1);i++){
                     loop1:
-                    for (int j = (amount-i-1);j>0;j--){
-                        if (boardString.charAt(r)==boardString.charAt(r+j*5)&&boardString.charAt(r+1)==boardString.charAt(r+1+j*5)){
+                    for (int j = 1;j<(amount-i);j++){
+                        /**if (boardString.charAt(2+i*5)==boardString.charAt(2+i*5+j*5)&&boardString.charAt(3+i*5)==boardString.charAt(3+i*5+j*5)){
                             break loop2;
                         }
-                        else {
-                            String tile1 = allTiles.get(j).toString();
-                            String tile2 = allTiles.get(j-1).toString();
+                        else {**/
+                            String tile1 = allTiles.get(i).toString();
+                            String tile2 = allTiles.get(i+j).toString();
+                            String con = tileReset(tile1);
                             if (areConnectedNeighbours(tile1,tile2)){
                                 return true;
                             }
                             else {
-                                String tile3 = allTiles.get(i).toString();
-                                String con = tileReset(tile3);
-                                char ro = tile3.charAt(2);
-                                char co = tile3.charAt(3);
+                                //String tile3 = allTiles.get(i).toString();
+                                char ro = tile1.charAt(2);
+                                char co = tile1.charAt(3);
                                 if (ro=='A'&&co=='1'){
                                     if (con.charAt(0)=='H') return true;
                                 }
@@ -277,22 +276,22 @@ public class RailroadInk {
                                     if (con.charAt(0)=='H') return true;
                                 }
                                 else if (ro=='B'&&co=='0'){
-                                    if (con.charAt(3)=='R') return true;
+                                    if (con.charAt(1)=='R') return true;
                                 }
                                 else if (ro=='B'&&co=='6'){
-                                    if (con.charAt(1)=='R') return true;
-                                }
-                                else if (ro=='D'&&co=='0'){
-                                    if (con.charAt(3)=='H') return true;
-                                }
-                                else if (ro=='D'&&co=='6'){
-                                    if (con.charAt(1)=='H') return true;
-                                }
-                                else if (ro=='F'&&co=='0'){
                                     if (con.charAt(3)=='R') return true;
                                 }
-                                else if (ro=='F'&&co=='6'){
+                                else if (ro=='D'&&co=='0'){
+                                    if (con.charAt(1)=='H') return true;
+                                }
+                                else if (ro=='D'&&co=='6'){
+                                    if (con.charAt(3)=='H') return true;
+                                }
+                                else if (ro=='F'&&co=='0'){
                                     if (con.charAt(1)=='R') return true;
+                                }
+                                else if (ro=='F'&&co=='6'){
+                                    if (con.charAt(3)=='R') return true;
                                 }
                                 else if (ro=='G'&&co=='1'){
                                     if (con.charAt(2)=='H') return true;
@@ -304,8 +303,8 @@ public class RailroadInk {
                                     if (con.charAt(2)=='H') return true;
                                 }
                             }
-                        }
-                    }
+                        //}
+                   // }
                 }
             }
         }
@@ -372,5 +371,7 @@ public class RailroadInk {
         // FIXME Task 12: compute the total score including bonus points
         return -1;
     }
+
+
 }
 

@@ -1,7 +1,7 @@
 We declare that the work toward our submission of Stage C was distributed among the group members as follows:
 
-* u2345678 30
-* u6801714 33.3
-* u0234567 30
+* u6718946 33.33
+* u6801714 33.33
+* u5828619 33.33
 
-Signed: Mary Jones (u2345678), Jiamin Dai (u6801714), and Sue Black (u0234567)
+Signed: Jesse (Jiaxi) Shen (u6718946), Jiamin Dai (u6801714), and Brodie Osborne (u5828619)
