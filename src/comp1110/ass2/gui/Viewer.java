@@ -100,15 +100,9 @@ public class Viewer extends Application {
 //    the tile placement string: B0A53
 //    tells us that the tile on die B face 0 is placed at grid A5 in orientation 3,
 //    whereas S3G26 tells us Special tile 3 is placed at G2 in orientation 6
-    public void makePlacement(String placement) {
+    private void makePlacement(String placement) {
         for (Object item : breakPlacementStringToPieces(placement)) {
             String piece = item.toString();
-//            String tileID = "" + piece.charAt(1) + piece.charAt(2);
-//            char row = piece.charAt(3);
-//            char col = piece.charAt(4);
-//            int orient = Integer.parseInt(String.valueOf(piece.charAt(5)));
-//
-//            Tile tile = new Tile(tileID, orient, col, row);
             Tile tile = Tile.makeTileFromString(piece);
             ImageView iv = tile.imgview;
 
@@ -117,6 +111,7 @@ public class Viewer extends Application {
 
             tileArray.add(tile);
             tiles.getChildren().add(iv);
+            System.out.println(tile.neighbourGrids);
         }
         root.getChildren().add(tiles);
         System.out.println(tileArray.get(0));
