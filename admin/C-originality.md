@@ -1,9 +1,6 @@
 We declare that the work we have submitted for Stage C of this assignment and all stages before it is entirely our own work, with the following documented exceptions:
 
-* The idea of using <...> to make the game run faster came from a discussion with <...> (noted in source code comments)
+* Some ideas for javaFX styling came from this website: https://docs.oracle.com/javafx/2/layout/size_align.htm titled: Working With Layouts in JavaFX.
 
-* The code in class <...> is based on a solution we found when researching the problem (URL provided in source code comments)
 
-*  ....
-
-Signed: Mary Jones (u2345678), Bob Smith (u3456789), and Sue Black (u0123456)
+Signed: Jesse (Jiaxi) Shen (u6718946), Jiamin Dai (u6801714), and Brodie Osborne (u5828619)
