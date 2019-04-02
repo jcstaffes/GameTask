@@ -1,9 +1,7 @@
 package comp1110.ass2;
 
 public class Board {
-    public String emptyboard(){
-
-    }
+    public String emptyboard;
     public static int emptyBpard(int n){
         return '0';
     }
