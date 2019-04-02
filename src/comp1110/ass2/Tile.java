@@ -13,7 +13,7 @@ public class Tile {
     public char column;
     public char row;
     public String connection;
-    public List neighbourGrids; //["N","E","S","W"] -> ["xy","xy","xy","xy"]
+    public List neighbourGrids;
     public ImageView imgview;
 
 
@@ -56,10 +56,10 @@ public class Tile {
      *      1
      *    2| |4
      *      3
-
-     * @author Jiamin Dai (u6801714) & Reformatted by Brodie Osborne (u5828619)
+     * @param id The ID of the Tile
+     * @param r The rotation of the Tile
+     * @author Jiamin Dai (u6801714) &  Brodie Osborne (u5828619)
      */
-
     private String getConnection(String id, int r) {
         String connection = "";
         switch (id) {
@@ -197,6 +197,8 @@ public class Tile {
 
     /**
      * Create a list of Neighbour coordinates (row,col)
+     * @param row The row position of the tile
+     * @param col the column position of the tile
      * @return points North, East, South, Wast "rc". If any point is FF means it doesn't exist.
      * @author Brodie Osborne (u5828619)
      */
@@ -243,7 +245,7 @@ public class Tile {
 
     /**
      * Create the image view for tile
-     *
+     * @param tile The tile object
      * @author Brodie Osborne (u5828619)
      */
     private static ImageView getImage(Tile tile) {
