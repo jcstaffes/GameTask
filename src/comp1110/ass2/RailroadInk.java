@@ -56,8 +56,20 @@ public class RailroadInk {
         if(boardString==null)
             return false;
         char []t=boardString.toCharArray();
+        String str="ABCDE";
+        int sum1=0;
+        char []str2=str.toCharArray();
+        for (int j=0;j<boardString.length()/5;j++){
+                for (int i=0;i<5;i++){
+                    str2[i]=boardString.charAt(5*j+i);
+                }
+            String tilecheck=str2.toString();
+            if (isTilePlacementWellFormed(tilecheck))
+                sum1++;
+        }
+        System.out.println(sum1);
         int sum=0;
-        if(boardString.length()%5==0&&boardString.length()<=155&&boardString.length()>=5){
+        if(boardString.length()%5==0&&boardString.length()<=155&&boardString.length()>=5&&sum1==boardString.length()/5){
         for(int i=0;i<boardString.length();i+=5){
             if(t[i]=='S')
                 sum++;
