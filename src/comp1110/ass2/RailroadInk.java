@@ -1,9 +1,11 @@
 package comp1110.ass2;
 
 import comp1110.ass2.gui.Viewer;
+import gittest.A;
+import gittest.C;
 
 import java.awt.*;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 
 public class RailroadInk {
@@ -94,132 +96,11 @@ public class RailroadInk {
      *
      * @return true if the placements are connected neighbours
      */
-    public static String tileReset(String t){
-        char []t1=t.toCharArray();
-        String str3="ABCD";
-        if (t1[0]=='S')
-            if (t1[1]=='0')
-                if(t1[4]=='0'||t1[4]=='4')
-                    str3="HHRH";
-                else if (t1[4]=='1'||t1[4]=='5')
-                    str3="HRHH";
-                else if (t1[4]=='2'||t1[4]=='6')
-                    str3="RHHH";
-                else
-                    str3="HHHR";
-            else if (t1[1]=='1')
-                if(t1[4]=='0'||t1[4]=='4')
-                    str3="HRRR";
-                else if (t1[4]=='1'||t1[4]=='5')
-                    str3="RRRH";
-                else if (t1[4]=='2'||t1[4]=='6')
-                    str3="RRHR";
-                else
-                    str3="RHRR";
-            else if (t1[1]=='2')
-                str3="HHHH";
-            else if (t1[1]=='3')
-                str3="RRRR";
-            else if (t1[1]=='4')
-                if(t1[4]=='0'||t1[4]=='7')
-                    str3="HHRR";
-                else if (t1[4]=='1'||t1[4]=='4')
-                    str3="HRRH";
-                else if (t1[4]=='2'||t1[4]=='5')
-                    str3="RRHH";
-                else
-                    str3="RHHR";
-            else
-            if(t1[4]%2==0)
-                str3="HRHR";
-            else
-                str3="RHRH";
-        else if(t1[0]=='A')
-            if (t1[1]=='0')
-                if(t1[4]=='0'||t1[4]=='7')
-                    str3="RRNN";
-                else if (t1[4]=='1'||t1[4]=='4')
-                    str3="RNNR";
-                else if (t1[4]=='2'||t1[4]=='5')
-                    str3="NNRR";
-                else
-                    str3="NRRN";
-            else if (t1[1]=='1')
-                if (t1[4]%2==0)
-                    str3="RNRN";
-                else
-                    str3="NRNR";
-            else if (t1[1]=='2')
-                if(t1[4]=='0'||t1[4]=='6')
-                    str3="RNRR";
-                else if (t1[4]=='1'||t1[4]=='7')
-                    str3="NRRR";
-                else if (t1[4]=='2'||t1[4]=='4')
-                    str3="RRRN";
-                else
-                    str3="RRNR";
-            else if (t1[1]=='3')
-                if(t1[4]=='0'||t1[4]=='6')
-                    str3="HNHH";
-                else if (t1[4]=='1'||t1[4]=='7')
-                    str3="NHHH";
-                else if (t1[4]=='2'||t1[4]=='4')
-                    str3="HHHN";
-                else
-                    str3="HHNH";
-            else if (t1[1]=='4')
-                if (t1[4]%2==0)
-                    str3="HNHN";
-                else
-                    str3="NHNH";
-            else
-            if(t1[4]=='0'||t1[4]=='7')
-                str3="HHNN";
-            else if (t1[4]=='1'||t1[4]=='4')
-                str3="HNNH";
-            else if (t1[4]=='2'||t1[4]=='5')
-                str3="NNHH";
-            else
-                str3="NHHN";
-        else
-            if (t1[1]=='0')
-                if(t1[4]=='0'||t1[4]=='4')
-                    str3="HNRN";
-                else if (t1[4]=='1'||t1[4]=='5')
-                    str3="NRNH";
-                else if (t1[4]=='2'||t1[4]=='6')
-                    str3="RNHN";
-                else
-                    str3="NHNR";
-            else if(t1[1]=='2')
-                if (t1[4]%2==0)
-                    str3="HRHR";
-                else
-                    str3="RHRH";
-            else
-                if (t1[4]=='0')
-                    str3="HNNR";
-                else if (t1[4]=='1')
-                    str3="NNRH";
-                else if (t1[4]=='2')
-                    str3="NRHN";
-                else if (t1[4]=='3')
-                    str3="RHNN";
-                else if (t1[4]=='4')
-                    str3="HRNN";
-                else if (t1[4]=='5')
-                    str3="RNNH";
-                else if (t1[4]=='6')
-                    str3="NNHR";
-                else
-                    str3="NHRN";
-        return str3;
 
-    }
     public static boolean areConnectedNeighbours(String tilePlacementStringA, String tilePlacementStringB) {
         //  @author Jiamin Dai(u6801714)
-        String str3=RailroadInk.tileReset(tilePlacementStringA);
-        String str4=RailroadInk.tileReset(tilePlacementStringB);
+        String str3=Tile.tileReset(tilePlacementStringA);
+        String str4=Tile.tileReset(tilePlacementStringB);
         if(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1&&str3.charAt(1)==str4.charAt(3)&&str3.charAt(1)!='N')
                 return true;
         else if (tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)+1&&str3.charAt(0)==str4.charAt(2)&&str3.charAt(0)!='N')
@@ -270,7 +151,7 @@ public class RailroadInk {
 
                             String tile1 = boardString.substring((0+i*5),(5+i*5));
                             String tile2 = boardString.substring((0+j*5),(5+j*5));
-                            String con = tileReset(tile1);
+                            String con = Tile.tileReset(tile1);
                             char ro = tile1.charAt(2);
                             char co = tile1.charAt(3);
                             char ro2 = tile2.charAt(2);
@@ -342,9 +223,35 @@ public class RailroadInk {
      *
      * @return a String representing the die roll e.g. A0A4A3B2
      */
+    /**
+     written by u6801714 Jiamin Dai
+     **/
     public static String generateDiceRoll() {
         // FIXME Task 7: generate a dice roll
-        return "";
+        char[] a=new char[8];
+        Random rand=new Random();
+        int sum1=0;
+        int sum2=0;
+        for (int i=0;i<8;i++){
+            if (i%2==0){
+                if (sum1>=3)
+                    a[i]='B';
+                else if (sum2>=1)
+                    a[i]='A';
+                else
+                    a[i]=(char)(rand.nextInt(66) % (66 - 65 + 1) + 65);
+                if (a[i]=='A')
+                    sum1++;
+                else if(a[i]=='B')
+                    sum2++;
+            }else{
+                if (a[i-1]=='A')
+                    a[i]=(char)(rand.nextInt(53) % (53 - 48 + 1) + 48);
+                else if(a[i-1]=='B')
+                    a[i]=(char)(rand.nextInt(50) % (50 - 48 + 1) + 48);
+            }
+        }
+        return String.valueOf(a);
     }
 
     /**
