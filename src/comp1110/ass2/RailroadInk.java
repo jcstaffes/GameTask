@@ -267,7 +267,26 @@ public class RailroadInk {
      */
     public static int getBasicScore(String boardString) {
         // FIXME Task 8: compute the basic score
-        return -1;
+        int score = 0;
+        for (int i = 0;i<(boardString.length()/5);i++){
+            if (boardString.charAt(i*5)=='C'||boardString.charAt(i*5)=='D'||boardString.charAt(i*5)=='E'){
+                if (boardString.charAt(i*5+1)==2){
+                    score = score+1;
+                }
+                else if (boardString.charAt(i*5+1)==3){
+                    score = score+1;
+                }
+                else if (boardString.charAt(i*5+1)==4){
+                    score = score+1;
+                }
+            }
+        }
+        String[] piece = {};  //want to get piece but have not down;
+        for (int i = 0;i<(boardString.length()/5);i++){
+
+        }
+
+        return score;
     }
 
     /**

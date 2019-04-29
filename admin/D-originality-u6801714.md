@@ -4,4 +4,4 @@ I declare that the work I have submitted for Stage D of this assignment and all 
 
 * The code in class <...> uses an idea suggested by <...>
 
-Signed: Jesse Shen (u6718946)
+Signed: Jiamin Dai (u6801714)
