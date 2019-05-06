@@ -50,18 +50,22 @@ public class Viewer extends Application {
 
     //Turns ABCDEFGHIJ into ['ABCDE','FGHIJ']
     public static List breakPlacementStringToPieces(String placement) {
-        int count = 0;
-        int index = 0;
-        int len = placement.length();
-        List<String> pieces = new ArrayList<>();
+        if (placement!=null) {
+            int count = 0;
+            int index = 0;
+            int len = placement.length();
+            List<String> pieces = new ArrayList<>();
 
-        while (count <= (len - 1)) {
-            pieces.add(index, (" " + placement.charAt(count) + placement.charAt(count + 1) + placement.charAt(count + 2) + placement.charAt(count + 3) + placement.charAt(count + 4)));
-            count += 5;
-            index += 1;
+            while (count <= (len - 1)) {
+                pieces.add(index, (" " + placement.charAt(count) + placement.charAt(count + 1) + placement.charAt(count + 2) + placement.charAt(count + 3) + placement.charAt(count + 4)));
+                count += 5;
+                index += 1;
+            }
+            return pieces;
         }
-        return pieces;
+        return null;
     }
+
 
     //Draw lines onto stage to create a grid
     private void drawGrid() {

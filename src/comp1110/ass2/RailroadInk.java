@@ -136,11 +136,12 @@ public class RailroadInk {
     public static boolean isValidPlacementSequence(String boardString) {
         // FIXME Task 6: determine whether the given placement sequence is valid
         //List allTiles = Viewer.breakPlacementStringToPieces(boardString);
-        int amount = (boardString.length()/5);
-        char ro1 = boardString.charAt(2);
-        char co1 = boardString.charAt(3);
+
 
         if (isBoardStringWellFormed(boardString)){
+            int amount = (boardString.length()/5);
+            char ro1 = boardString.charAt(2);
+            char co1 = boardString.charAt(3);
             if (!((ro1=='A'&&co1=='1')||(ro1=='A'&&co1=='3')||(ro1=='A'&&co1=='5')||(ro1=='B'&&co1=='0')||(ro1=='B'&&co1=='6')||(ro1=='D'&&co1=='0')||(ro1=='D'&&co1=='6')||(ro1=='F'&&co1=='0')||(ro1=='F'&&co1=='6')||(ro1=='G'&&co1=='1')||(ro1=='G'&&co1=='3')||(ro1=='G'&&co1=='5'))){
                 return false;
             }
@@ -209,7 +210,6 @@ public class RailroadInk {
                 }
         }
 
-
         return true;
     }
 
@@ -268,22 +268,56 @@ public class RailroadInk {
     public static int getBasicScore(String boardString) {
         // FIXME Task 8: compute the basic score
         int score = 0;
-        for (int i = 0;i<(boardString.length()/5);i++){
-            if (boardString.charAt(i*5)=='C'||boardString.charAt(i*5)=='D'||boardString.charAt(i*5)=='E'){
-                if (boardString.charAt(i*5+1)==2){
-                    score = score+1;
-                }
-                else if (boardString.charAt(i*5+1)==3){
-                    score = score+1;
-                }
-                else if (boardString.charAt(i*5+1)==4){
-                    score = score+1;
+        List<String> piece0 = new ArrayList<>();
+        String str8 = new String();
+        int ExitNum = 0;
+        int ErrorNum = 0;
+        piece0 = Viewer.breakPlacementStringToPieces(boardString);
+
+        if (boardString==null) return 0;
+
+        for (int i = 0;i<piece0.size();i++){
+            String tile1 = piece0.get(i);
+            char[] t1 = tile1.toCharArray();
+            if (t1[3]=='C'||t1[3]=='D'||t1[3]=='E') {
+                if (t1[4] == '2'||t1[4] == '3'||t1[4]=='4') {
+                    score++;
                 }
             }
         }
-        String[] piece = {};  //want to get piece but have not down;
-        for (int i = 0;i<(boardString.length()/5);i++){
 
+
+        for (int i = 0;i<(boardString.length()/5);i++){
+            if (piece0!=null){
+                for (int j=0;j<boardString.length()/5;j++){
+                    if (piece0!=null&&piece0.size()>j) {
+                        List<String> piece1 = piece0;
+                        String checktile = piece0.get(j);
+                        char[] chars0 = checktile.toCharArray();
+                        if ((chars0[2] == 'A' && chars0[3] == '1') || (chars0[2] == 'A' && chars0[3] == '3') || (chars0[2] == 'A' && chars0[3] == '5') || (chars0[2] == 'B' && chars0[3] == '0') || (chars0[2] == 'B' && chars0[3] == '6') || (chars0[2] == 'D' && chars0[3] == '0') || (chars0[2] == 'D' && chars0[3] == '6') || (chars0[2] == 'F' && chars0[3] == '0') || (chars0[2] == 'F' && chars0[3] == '6') || (chars0[2] == 'G' && chars0[3] == '1') || (chars0[2] == 'G' && chars0[3] == '3') || (chars0[2] == 'G' && chars0[3] == '5')) {
+                            ExitNum++;
+                            piece0.remove(j);
+                            int savej = j;
+                            j--;
+                        }
+                        String tile1 = checktile;
+                        for (int k=0;k<piece0.size();k++){
+                            String tile2 = piece0.get(k);
+                            char[] chars = tile2.toCharArray();
+                            if (true/*areConnectedNeighbours(tile1,tile2)*/){
+                                tile1 = tile2;
+                                if ((chars[2]=='A'&&chars[3]=='1')||(chars[2]=='A'&&chars[3]=='3')||(chars[2]=='A'&&chars[3]=='5')||(chars[2]=='B'&&chars[3]=='0')||(chars[2]=='B'&&chars[3]=='6')||(chars[2]=='D'&&chars[3]=='0')||(chars[2]=='D'&&chars[3]=='6')||(chars[2]=='F'&&chars[3]=='0')||(chars[2]=='F'&&chars[3]=='6')||(chars[2]=='G'&&chars[3]=='1')||(chars[2]=='G'&&chars[3]=='3')||(chars[2]=='G'&&chars[3]=='5')) {
+                                    ExitNum++;
+                                    piece0.remove(k);
+                                    k--;
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
         }
 
         return score;
