@@ -1,6 +1,8 @@
 package comp1110.ass2.gui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -160,10 +162,50 @@ public class Viewer extends Application {
     //A4A12B2B16A1B01A1B23S1B32A1A32B1B44B2A44A4C16A3D15A4D01A5D23A4E20B1F24A2F17A1F01B0G16A5C34A4C43A5C53A3D50A4D61S4E50A0F51A1F67S2E46B1E31A1F30A2G36A1G41B1G52
     //Test data to enter
 
+    /**click the image and rotate the image
+     * @author u6801714 Jiamin Dai
+     * **/
+    private static ImageView clicktheimage(ImageView image){
+        return image;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("StepsGame Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
+
+        /**@author u6801714 Jiamin Dai
+        //         * add button
+        //         * **/
+        Button btn = new Button("Dice");
+        btn.setLayoutX(50);
+        btn.setLayoutY(50);
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                root.getChildren().clear();
+                root.getChildren().add(btn);
+
+                root.getChildren().add(controls);
+
+                makeControls();
+
+                //Draw board grid
+                drawGrid();
+                root.getChildren().add(lines);
+
+                //Initialise handlers
+                initilisehandlers(scene);
+                ArrayList<String> dice=new ArrayList<>();
+                dice=Tile.generateTile(RailroadInk.generateDiceRoll());
+                System.out.println(dice);
+                for (int i=0;i<4;i++){
+                    root.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+60*i));
+                }
+            }
+        });
+
+        root.getChildren().add(btn);
 
         root.getChildren().add(controls);
 

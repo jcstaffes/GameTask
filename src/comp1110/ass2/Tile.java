@@ -435,5 +435,28 @@ public class Tile {
         return iv;
     }
 
+    /**generate tile id to get image,use generatediceroll
+     * @author u6801714 Jiamin Dai**/
 
+    public static ArrayList<String> generateTile(String d){
+        ArrayList<String> image=new ArrayList<>();
+        char[] str=new char[2];
+        for (int i=0;i<d.length()-1;i=i+2){
+            str[0]=d.charAt(i);
+            str[1]=d.charAt(i+1);
+            image.add(String.valueOf(str));
+        }
+        return image;
+    }
+
+    public static ImageView rotateImageinDice(String assets,int line){
+        Image originalImage = new Image("comp1110/ass2/gui/assets/" + assets + ".png");
+        ImageView iv=new ImageView();
+        iv.setImage(originalImage);
+        iv.setFitHeight(50);
+        iv.setFitWidth(50);
+        iv.setX(50);
+        iv.setY(line);
+        return iv;
+    }
 }
