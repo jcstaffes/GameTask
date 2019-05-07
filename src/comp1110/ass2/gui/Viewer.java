@@ -169,7 +169,7 @@ public class Viewer extends Application {
     /**click the image and rotate the image
      * @author u6801714 Jiamin Dai
      * **/
-    private static ImageView clicktheimage(ImageView image){
+    private static ImageView clicktheimageandrotateit(ImageView image){
         return image;
     }
 
@@ -177,34 +177,23 @@ public class Viewer extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("StepsGame Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
-
         /**@author u6801714 Jiamin Dai
         //         * add button
         //         * **/
         Button btn = new Button("Dice");
         btn.setLayoutX(50);
         btn.setLayoutY(50);
+        Group tiledice=new Group();
+        root.getChildren().add(tiledice);
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                root.getChildren().clear();
-                root.getChildren().add(btn);
-
-                root.getChildren().add(controls);
-
-                makeControls();
-
-                //Draw board grid
-                drawGrid();
-                root.getChildren().add(lines);
-
-                //Initialise handlers
-                initilisehandlers(scene);
+                tiledice.getChildren().clear();
                 ArrayList<String> dice=new ArrayList<>();
                 dice=Tile.generateTile(RailroadInk.generateDiceRoll());
                 System.out.println(dice);
                 for (int i=0;i<4;i++){
-                    root.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+60*i));
+                    tiledice.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+60*i));
                 }
             }
         });
