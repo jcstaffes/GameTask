@@ -3,6 +3,7 @@ package comp1110.ass2.gui;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,7 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -44,6 +47,7 @@ public class Viewer extends Application {
     private final Group controls = new Group();
     private final Group tiles = new Group();
     private final Group lines = new Group();
+    private static Group tiledice=new Group();
     TextField textField;
 
 
@@ -169,21 +173,21 @@ public class Viewer extends Application {
     /**click the image and rotate the image
      * @author u6801714 Jiamin Dai
      * **/
-    private static ImageView clicktheimageandrotateit(ImageView image){
-        return image;
+    private void DropImage(){
+        Point2D dragDistance=null;
+        StackPane pane=new StackPane();
+        pane.addEventFilter(MouseDragEvent.MOUSE_PRESSED,mouseEvent -> {
+            
+        });
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("StepsGame Viewer");
-        Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
+    private void ClickDice(){
         /**@author u6801714 Jiamin Dai
         //         * add button
         //         * **/
         Button btn = new Button("Dice");
         btn.setLayoutX(50);
         btn.setLayoutY(50);
-        Group tiledice=new Group();
         root.getChildren().add(tiledice);
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -197,8 +201,14 @@ public class Viewer extends Application {
                 }
             }
         });
-
         root.getChildren().add(btn);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("StepsGame Viewer");
+        Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
+        ClickDice();
 
         root.getChildren().add(controls);
 
