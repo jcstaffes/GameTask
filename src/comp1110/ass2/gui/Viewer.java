@@ -161,7 +161,9 @@ public class Viewer extends Application {
                 tiles.getChildren().clear();
                 root.getChildren().clear();
                 root.getChildren().add(controls);
+                root.getChildren().add(tiledice);
                 root.getChildren().add(lines);
+
                 event.consume();
             }
         });
@@ -201,7 +203,7 @@ public class Viewer extends Application {
                 }
             }
         });
-        root.getChildren().add(btn);
+        controls.getChildren().add(btn);
     }
 
     @Override
