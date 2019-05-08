@@ -154,7 +154,6 @@ public class Viewer extends Application {
     }
 
     private void initilisehandlers(Scene scene) {
-
         /* create handlers for key  */
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {

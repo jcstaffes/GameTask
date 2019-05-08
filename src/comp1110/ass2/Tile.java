@@ -320,6 +320,7 @@ public class Tile {
         return str3;
 
     }
+
     /**
      * Create a list of Neighbour coordinates (row,col)
      * @param row The row position of the tile
@@ -424,11 +425,6 @@ public class Tile {
         iv.setRotate(iv.getRotate() + setRotation(tile.rotation));
         iv.setX(Board.getOffset(tile.column) + Viewer.horizontalOffset);
         iv.setY(Board.getOffset(tile.row) + Viewer.verticalOffset);
-
-//            For DEBUGGING
-//            System.out.println(iv.getX());
-//            System.out.println(iv.getY());
-
 
         //B0A53B0A64
         //A5A00A5A11A5A22A5A33A5A44A5A55A5A66A5A77
