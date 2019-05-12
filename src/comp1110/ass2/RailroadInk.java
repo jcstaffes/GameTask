@@ -232,7 +232,7 @@ public class RailroadInk {
         Random rand=new Random();
         int sum1=0;
         int sum2=0;
-        for (int i=0;i<8;i++){
+      for (int i=0;i<8;i++){
             if (i%2==0){
                 if (sum1>=3)
                     a[i]='B';
@@ -245,7 +245,9 @@ public class RailroadInk {
                 else if(a[i]=='B')
                     sum2++;
             }else{
-                if (a[i-1]=='A')
+                if (i==7)
+                    a[i]=(char)(rand.nextInt(50) % (50 - 48 + 1) + 48);
+                else if (a[i-1]=='A')
                     a[i]=(char)(rand.nextInt(53) % (53 - 48 + 1) + 48);
                 else if(a[i-1]=='B')
                     a[i]=(char)(rand.nextInt(50) % (50 - 48 + 1) + 48);

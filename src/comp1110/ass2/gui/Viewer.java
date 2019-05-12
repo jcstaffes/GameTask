@@ -48,6 +48,7 @@ public class Viewer extends Application {
     private final Group tiles = new Group();
     private final Group lines = new Group();
     private static Group tiledice=new Group();
+    private static String image=new String();
     TextField textField;
 
 
@@ -174,12 +175,13 @@ public class Viewer extends Application {
     /**click the image and rotate the image
      * @author u6801714 Jiamin Dai
      * **/
+
+    public void collectimage(ArrayList<String> array){
+        
+    }
     private void DropImage(){
-        Point2D dragDistance=null;
-        StackPane pane=new StackPane();
-        pane.addEventFilter(MouseDragEvent.MOUSE_PRESSED,mouseEvent -> {
-            
-        });
+
+
     }
 
     private void ClickDice(){
@@ -190,6 +192,7 @@ public class Viewer extends Application {
         btn.setLayoutX(50);
         btn.setLayoutY(50);
         root.getChildren().add(tiledice);
+        root.getChildren().add(Tile.specialtile());
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -198,7 +201,7 @@ public class Viewer extends Application {
                 dice=Tile.generateTile(RailroadInk.generateDiceRoll());
                 System.out.println(dice);
                 for (int i=0;i<4;i++){
-                    tiledice.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+60*i));
+                    tiledice.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+110*i));
                 }
             }
         });

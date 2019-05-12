@@ -1,5 +1,6 @@
 package comp1110.ass2;
 
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import comp1110.ass2.gui.Viewer;
@@ -449,10 +450,25 @@ public class Tile {
         Image originalImage = new Image("comp1110/ass2/gui/assets/" + assets + ".png");
         ImageView iv=new ImageView();
         iv.setImage(originalImage);
-        iv.setFitHeight(50);
-        iv.setFitWidth(50);
-        iv.setX(50);
+        iv.setFitHeight(100);
+        iv.setFitWidth(100);
+        iv.setX(20);
         iv.setY(line);
         return iv;
+    }
+
+    public static Group specialtile(){
+        Group image=new Group();
+        for (int i=0;i<6;i++){
+            Image originalImage = new Image("comp1110/ass2/gui/assets/S" + i+ ".png");
+            ImageView iv=new ImageView();
+            iv.setImage(originalImage);
+            iv.setFitHeight(100);
+            iv.setFitWidth(100);
+            iv.setX(890);
+            iv.setY(10+110*i);
+            image.getChildren().add(iv);
+        }
+        return image;
     }
 }
