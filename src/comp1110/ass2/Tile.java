@@ -471,4 +471,11 @@ public class Tile {
         }
         return image;
     }
+
+    public static ImageView newimage(ImageView oldimage){
+        oldimage.setOnScroll(event->{
+            oldimage.setRotate((oldimage.getRotate()+90)%360);
+        });
+        return oldimage;
+    }
 }

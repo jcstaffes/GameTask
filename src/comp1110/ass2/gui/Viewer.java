@@ -5,18 +5,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import comp1110.ass2.Tile;
 import comp1110.ass2.Board;
@@ -48,7 +52,9 @@ public class Viewer extends Application {
     private final Group tiles = new Group();
     private final Group lines = new Group();
     private static Group tiledice=new Group();
-    private static String image=new String();
+    private static ImageView image=new ImageView();
+    private static ArrayList<String> dice1=new ArrayList<>();
+    private static Group newimagegroup=new Group();
     TextField textField;
 
 
@@ -176,12 +182,43 @@ public class Viewer extends Application {
      * @author u6801714 Jiamin Dai
      * **/
 
-    public void collectimage(ArrayList<String> array){
-        
+    public void collectimage1(){
+//        Image c1 = new Image("comp1110/ass2/gui/assets/" + array.get(0) + ".png");
+//        Image c2 = new Image("comp1110/ass2/gui/assets/" + array.get(1) + ".png");
+//        Image c3 = new Image("comp1110/ass2/gui/assets/" + array.get(2) + ".png");
+//        Image c4 = new Image("comp1110/ass2/gui/assets/" + array.get(3) + ".png");
+//        Image s1 = new Image("comp1110/ass2/gui/assets/S" + 1+ ".png");
+//        Image s2 = new Image("comp1110/ass2/gui/assets/S" + 2+ ".png");
+//        Image s3 = new Image("comp1110/ass2/gui/assets/S" + 3+ ".png");
+//        Image s4 = new Image("comp1110/ass2/gui/assets/S" + 4+ ".png");
+//        Image s5 = new Image("comp1110/ass2/gui/assets/S" + 5+ ".png");
+//        Image s0 = new Image("comp1110/ass2/gui/assets/S" + 6+ ".png");
+        tiledice.getChildren().get(0).setOnDragDone(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+
+            }
+        });
+
+
     }
-    private void DropImage(){
 
 
+
+    private void rotateimage(){
+        Node a=tiledice.getChildren().get(0);
+        a.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tiledice.getChildren().clear();
+                image=Tile.rotateImageinDice(dice1.get(0),100);
+                newimagegroup.getChildren().add(Tile.newimage(image));
+                for (int i=1;i<4;i++){
+                    tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
+                }
+            }
+        });
+        controls.getChildren().add(a);
     }
 
     private void ClickDice(){
@@ -199,6 +236,7 @@ public class Viewer extends Application {
                 tiledice.getChildren().clear();
                 ArrayList<String> dice=new ArrayList<>();
                 dice=Tile.generateTile(RailroadInk.generateDiceRoll());
+                dice1=dice;
                 System.out.println(dice);
                 for (int i=0;i<4;i++){
                     tiledice.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+110*i));
@@ -207,6 +245,8 @@ public class Viewer extends Application {
         });
         controls.getChildren().add(btn);
     }
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {

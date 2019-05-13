@@ -228,32 +228,8 @@ public class RailroadInk {
      **/
     public static String generateDiceRoll() {
         // FIXME Task 7: generate a dice roll
-        char[] a=new char[8];
         Random rand=new Random();
-        int sum1=0;
-        int sum2=0;
-      for (int i=0;i<8;i++){
-            if (i%2==0){
-                if (sum1>=3)
-                    a[i]='B';
-                else if (sum2>=1)
-                    a[i]='A';
-                else
-                    a[i]=(char)(rand.nextInt(66) % (66 - 65 + 1) + 65);
-                if (a[i]=='A')
-                    sum1++;
-                else if(a[i]=='B')
-                    sum2++;
-            }else{
-                if (i==7)
-                    a[i]=(char)(rand.nextInt(50) % (50 - 48 + 1) + 48);
-                else if (a[i-1]=='A')
-                    a[i]=(char)(rand.nextInt(53) % (53 - 48 + 1) + 48);
-                else if(a[i-1]=='B')
-                    a[i]=(char)(rand.nextInt(50) % (50 - 48 + 1) + 48);
-            }
-        }
-        return String.valueOf(a);
+        return "A"+rand.nextInt(6)+"A"+rand.nextInt(6)+"A"+rand.nextInt(6)+"B"+rand.nextInt(3);
     }
 
     /**
