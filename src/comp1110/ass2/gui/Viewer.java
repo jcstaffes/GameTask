@@ -26,6 +26,7 @@ import comp1110.ass2.Tile;
 import comp1110.ass2.Board;
 import comp1110.ass2.RailroadInk;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -206,19 +207,22 @@ public class Viewer extends Application {
 
 
     private void rotateimage(){
-        Node a=tiledice.getChildren().get(0);
-        a.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Button btn1=new Button("rotate");
+        btn1.setLayoutX(120);
+        btn1.setLayoutY(120);
+        btn1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(MouseEvent mouseEvent) {
+            public void handle(ActionEvent ActionEvent) {
                 tiledice.getChildren().clear();
-                image=Tile.rotateImageinDice(dice1.get(0),100);
-                newimagegroup.getChildren().add(Tile.newimage(image));
+                ImageView image=Tile.rotateImageinDice(dice1.get(0),100);
+                tiledice.getChildren().add(Tile.newimage(image));
+                System.out.println('1');
                 for (int i=1;i<4;i++){
                     tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
                 }
             }
         });
-        controls.getChildren().add(a);
+        controls.getChildren().add(btn1);
     }
 
     private void ClickDice(){
@@ -241,6 +245,7 @@ public class Viewer extends Application {
                 for (int i=0;i<4;i++){
                     tiledice.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+110*i));
                 }
+                rotateimage();
             }
         });
         controls.getChildren().add(btn);
