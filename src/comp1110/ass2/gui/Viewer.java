@@ -56,6 +56,10 @@ public class Viewer extends Application {
     private static ImageView image=new ImageView();
     private static ArrayList<String> dice1=new ArrayList<>();
     private static Group newimagegroup=new Group();
+    private static int sum=0;
+    private static int sum1=0;
+    private static int sum2=0;
+    private static int sum3=0;
     TextField textField;
 
 
@@ -207,22 +211,76 @@ public class Viewer extends Application {
 
 
     private void rotateimage(){
-        Button btn1=new Button("rotate");
-        btn1.setLayoutX(120);
-        btn1.setLayoutY(120);
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
+//        Button btn1=new Button("rotate");
+//        btn1.setLayoutX(120);
+//        btn1.setLayoutY(120);
+        Node a=tiledice.getChildren().get(0);
+        a.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent ActionEvent) {
+            public void handle(MouseEvent MouseEvent) {
                 tiledice.getChildren().clear();
                 ImageView image=Tile.rotateImageinDice(dice1.get(0),100);
-                tiledice.getChildren().add(Tile.newimage(image));
+                image.setRotate(90+90*sum);
+                sum++;
+                tiledice.getChildren().add(image);
                 System.out.println('1');
                 for (int i=1;i<4;i++){
                     tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
                 }
             }
         });
-        controls.getChildren().add(btn1);
+        controls.getChildren().add(a);
+
+        Node b=tiledice.getChildren().get(1);
+        b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent MouseEvent) {
+                tiledice.getChildren().clear();
+                ImageView image=Tile.rotateImageinDice(dice1.get(1),100);
+                image.setRotate(90+90*sum1);
+                sum1++;
+                tiledice.getChildren().add(image);
+                System.out.println('1');
+//                for (int i=1;i<4;i++){
+//                    tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
+//                }
+            }
+        });
+        controls.getChildren().add(b);
+
+        Node c=tiledice.getChildren().get(2);
+        c.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent MouseEvent) {
+                tiledice.getChildren().clear();
+                ImageView image=Tile.rotateImageinDice(dice1.get(2),100);
+                image.setRotate(90+90*sum2);
+                sum2++;
+                tiledice.getChildren().add(image);
+                System.out.println('1');
+//                for (int i=1;i<4;i++){
+//                    tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
+//                }
+            }
+        });
+        controls.getChildren().add(c);
+
+        Node d=tiledice.getChildren().get(3);
+        d.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent MouseEvent) {
+                tiledice.getChildren().clear();
+                ImageView image=Tile.rotateImageinDice(dice1.get(3),100);
+                image.setRotate(90+90*sum3);
+                sum3++;
+                tiledice.getChildren().add(image);
+                System.out.println('1');
+//                for (int i=1;i<4;i++){
+//                    tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
+//                }
+            }
+        });
+        controls.getChildren().add(d);
     }
 
     private void ClickDice(){
@@ -248,6 +306,7 @@ public class Viewer extends Application {
                 rotateimage();
             }
         });
+
         controls.getChildren().add(btn);
     }
 
