@@ -18,10 +18,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import comp1110.ass2.Tile;
 import comp1110.ass2.Board;
 import comp1110.ass2.RailroadInk;
+import javafx.stage.Window;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -50,13 +52,20 @@ public class Viewer extends Application {
     private final Group tiles = new Group();
     private final Group lines = new Group();
     private static Group tiledice=new Group();
-    private static ImageView image=new ImageView();
-    private static ArrayList<String> dice1=new ArrayList<>();
-    private static Group newimagegroup=new Group();
+    private static Group boardtile=new Group();
+    private static Group specialtile=new Group();
+    private static Group theboard=new Group();
+    private static ArrayList<String> boardstring=new ArrayList<>();
+    private static ArrayList<String> d=new ArrayList<>();
     private static int sum=0;
     private static int sum1=0;
     private static int sum2=0;
     private static int sum3=0;
+    private static int sum4=0;
+    private static int sum5=0;
+    private static int sum6=0;
+    private static int sum7=0;
+    private static int sum8=0;
     TextField textField;
 
 
@@ -180,115 +189,157 @@ public class Viewer extends Application {
     //A4A12B2B16A1B01A1B23S1B32A1A32B1B44B2A44A4C16A3D15A4D01A5D23A4E20B1F24A2F17A1F01B0G16A5C34A4C43A5C53A3D50A4D61S4E50A0F51A1F67S2E46B1E31A1F30A2G36A1G41B1G52
     //Test data to enter
 
+    public void setBoardtile(String tile,double x,double y,int s){
+        Image originalImage = new Image("comp1110/ass2/gui/assets/" + tile + ".png");
+        ImageView iv=new ImageView();
+        iv.setImage(originalImage);
+        iv.setFitHeight(100);
+        iv.setFitWidth(100);
+        iv.setX(x);
+        iv.setY(y);
+        iv.setRotate(90*s);
+        boardtile.getChildren().add(iv);
+    }
+
+    public void clickdropanddrag(){
+        tiledice.getChildren().get(0).setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tiledice.getChildren().get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        setBoardtile(d.get(0),mouseEvent.getX(),mouseEvent.getY(),sum);
+                    }
+                });
+            }
+        });
+
+        tiledice.getChildren().get(1).setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tiledice.getChildren().get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        setBoardtile(d.get(1),mouseEvent.getX(),mouseEvent.getY(),sum1);
+                    }
+                });
+            }
+        });
+
+        tiledice.getChildren().get(2).setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tiledice.getChildren().get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        setBoardtile(d.get(2),mouseEvent.getX(),mouseEvent.getY(),sum2);
+                    }
+                });
+            }
+        });
+
+        tiledice.getChildren().get(3).setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tiledice.getChildren().get(3).setOnMouseReleased(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        setBoardtile(d.get(3),mouseEvent.getX(),mouseEvent.getY(),sum3);
+                    }
+                });
+            }
+        });
+
+
+    }
 
 
     public void rotateimage(){
         /**@author Jiamin Dai u6801714
          * rotate image under dice**/
-        Button btn1=new Button("rotate");
-        btn1.setLayoutX(120);
-        btn1.setLayoutY(120);
-        btn1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        tiledice.getChildren().get(0).setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
-            public void handle(MouseEvent MouseEvent) {
-                Node a=tiledice.getChildren().get(1);
-                Node b=tiledice.getChildren().get(2);
-                Node c=tiledice.getChildren().get(3);
-                tiledice.getChildren().clear();
-                ImageView image=Tile.rotateImageinDice(dice1.get(0),100);
-                image.setRotate(90+90*sum);
+            public void handle(ScrollEvent scrollEvent) {
+                tiledice.getChildren().get(0).setRotate(90+90*sum);
                 sum++;
-                tiledice.getChildren().add(image);
-                tiledice.getChildren().add(a);
-                tiledice.getChildren().add(b);
-                tiledice.getChildren().add(c);
-                System.out.println('1');
+                clickdropanddrag();
             }
         });
-        controls.getChildren().add(btn1);
 
-        Button btn2=new Button("rotate");
-        btn2.setLayoutX(120);
-        btn2.setLayoutY(240);
-        btn2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        tiledice.getChildren().get(1).setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
-            public void handle(MouseEvent MouseEvent) {
-                Node a=tiledice.getChildren().get(0);
-                Node b=tiledice.getChildren().get(2);
-                Node c=tiledice.getChildren().get(3);
-                tiledice.getChildren().clear();
-                ImageView image=Tile.rotateImageinDice(dice1.get(1),210);
-                image.setRotate(90+90*sum1);
+            public void handle(ScrollEvent scrollEvent) {
+                tiledice.getChildren().get(1).setRotate(90+90*sum1);
                 sum1++;
-                tiledice.getChildren().add(a);
-                tiledice.getChildren().add(image);
-                tiledice.getChildren().add(b);
-                tiledice.getChildren().add(c);
-                System.out.println('2');
             }
         });
-        controls.getChildren().add(btn2);
 
-        Button btn3=new Button("rotate");
-        btn3.setLayoutX(120);
-        btn3.setLayoutY(360);
-        btn3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        tiledice.getChildren().get(2).setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
-            public void handle(MouseEvent MouseEvent) {
-                Node a=tiledice.getChildren().get(0);
-                Node b=tiledice.getChildren().get(1);
-                Node c=tiledice.getChildren().get(3);
-                tiledice.getChildren().clear();
-                ImageView image=Tile.rotateImageinDice(dice1.get(2),320);
-                image.setRotate(90+90*sum2);
+            public void handle(ScrollEvent scrollEvent) {
+                tiledice.getChildren().get(2).setRotate(90+90*sum2);
                 sum2++;
-                tiledice.getChildren().add(a);
-                tiledice.getChildren().add(b);
-                tiledice.getChildren().add(image);
-                tiledice.getChildren().add(c);
-                System.out.println('3');
             }
         });
-        controls.getChildren().add(btn3);
 
-        Button btn4=new Button("rotate");
-        btn4.setLayoutX(120);
-        btn4.setLayoutY(480);
-        btn4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        tiledice.getChildren().get(3).setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
-            public void handle(MouseEvent MouseEvent) {
-                Node a=tiledice.getChildren().get(0);
-                Node b=tiledice.getChildren().get(1);
-                Node c=tiledice.getChildren().get(2);
-                tiledice.getChildren().clear();
-                ImageView image=Tile.rotateImageinDice(dice1.get(3),430);
-                image.setRotate(90+90*sum3);
+            public void handle(ScrollEvent scrollEvent) {
+                tiledice.getChildren().get(3).setRotate(90+90*sum3);
                 sum3++;
-                tiledice.getChildren().add(a);
-                tiledice.getChildren().add(b);
-                tiledice.getChildren().add(c);
-                tiledice.getChildren().add(image);
-                System.out.println('4');
             }
         });
-        controls.getChildren().add(btn4);
-    }
 
-    public void DragandDrop(){
-        tiledice.getChildren().get(0).setOnDragDetected(new EventHandler<MouseEvent>() {
+        specialtile.getChildren().get(0).setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
-            public void handle(MouseEvent mouseEvent) {
-                Dragboard db=tiledice.getChildren().get(0).startDragAndDrop(TransferMode.ANY);
-
-                ClipboardContent content=new ClipboardContent();
-                Image iv=new Image("comp1110/ass2/gui/assets/" + dice1.get(0) + ".png");
-                content.putImage(iv);
-                db.setDragView(iv);
-
-                mouseEvent.consume();
+            public void handle(ScrollEvent scrollEvent) {
+                specialtile.getChildren().get(0).setRotate(90+90*sum4);
+                sum4++;
             }
         });
+
+        specialtile.getChildren().get(1).setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent scrollEvent) {
+                specialtile.getChildren().get(1).setRotate(90+90*sum5);
+                sum5++;
+            }
+        });
+
+        specialtile.getChildren().get(2).setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent scrollEvent) {
+                specialtile.getChildren().get(2).setRotate(90+90*sum6);
+                sum6++;
+            }
+        });
+
+        specialtile.getChildren().get(3).setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent scrollEvent) {
+                specialtile.getChildren().get(3).setRotate(90+90*sum7);
+                sum7++;
+            }
+        });
+
+        specialtile.getChildren().get(4).setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent scrollEvent) {
+                specialtile.getChildren().get(4).setRotate(90+90*sum7);
+                sum7++;
+            }
+        });
+
+        specialtile.getChildren().get(5).setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent scrollEvent) {
+                specialtile.getChildren().get(5).setRotate(90+90*sum8);
+                sum8++;
+            }
+        });
+
     }
+
 
     private void ClickDice(){
         /**@author u6801714 Jiamin Dai
@@ -298,7 +349,8 @@ public class Viewer extends Application {
         btn.setLayoutX(50);
         btn.setLayoutY(50);
         root.getChildren().add(tiledice);
-        root.getChildren().add(Tile.specialtile());
+        specialtile=Tile.specialtile();
+        root.getChildren().add(specialtile);
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -307,19 +359,20 @@ public class Viewer extends Application {
                 sum2=0;
                 sum3=0;
                 tiledice.getChildren().clear();
+                boardtile.getChildren().clear();
                 ArrayList<String> dice=new ArrayList<>();
                 dice=Tile.generateTile(RailroadInk.generateDiceRoll());
-                dice1=dice;
+                d=dice;
                 System.out.println(dice);
                 for (int i=0;i<4;i++){
                     tiledice.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+110*i));
                 }
                 rotateimage();
-                DragandDrop();
+                clickdropanddrag();
             }
         });
-
         controls.getChildren().add(btn);
+        root.getChildren().add(boardtile);
     }
 
 
