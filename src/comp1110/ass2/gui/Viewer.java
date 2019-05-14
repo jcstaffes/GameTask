@@ -208,79 +208,94 @@ public class Viewer extends Application {
 
     }
 
-
-
     private void rotateimage(){
-//        Button btn1=new Button("rotate");
-//        btn1.setLayoutX(120);
-//        btn1.setLayoutY(120);
-        Node a=tiledice.getChildren().get(0);
-        a.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Button btn1=new Button("rotate");
+        btn1.setLayoutX(120);
+        btn1.setLayoutY(120);
+        btn1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent MouseEvent) {
+                Node a=tiledice.getChildren().get(1);
+                Node b=tiledice.getChildren().get(2);
+                Node c=tiledice.getChildren().get(3);
                 tiledice.getChildren().clear();
                 ImageView image=Tile.rotateImageinDice(dice1.get(0),100);
                 image.setRotate(90+90*sum);
                 sum++;
                 tiledice.getChildren().add(image);
+                tiledice.getChildren().add(a);
+                tiledice.getChildren().add(b);
+                tiledice.getChildren().add(c);
                 System.out.println('1');
-                for (int i=1;i<4;i++){
-                    tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
-                }
             }
         });
-        controls.getChildren().add(a);
+        controls.getChildren().add(btn1);
 
-        Node b=tiledice.getChildren().get(1);
-        b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Button btn2=new Button("rotate");
+        btn2.setLayoutX(120);
+        btn2.setLayoutY(240);
+        btn2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent MouseEvent) {
+                Node a=tiledice.getChildren().get(0);
+                Node b=tiledice.getChildren().get(2);
+                Node c=tiledice.getChildren().get(3);
                 tiledice.getChildren().clear();
-                ImageView image=Tile.rotateImageinDice(dice1.get(1),100);
+                ImageView image=Tile.rotateImageinDice(dice1.get(1),210);
                 image.setRotate(90+90*sum1);
                 sum1++;
+                tiledice.getChildren().add(a);
                 tiledice.getChildren().add(image);
-                System.out.println('1');
-//                for (int i=1;i<4;i++){
-//                    tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
-//                }
+                tiledice.getChildren().add(b);
+                tiledice.getChildren().add(c);
+                System.out.println('2');
             }
         });
-        controls.getChildren().add(b);
+        controls.getChildren().add(btn2);
 
-        Node c=tiledice.getChildren().get(2);
-        c.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Button btn3=new Button("rotate");
+        btn3.setLayoutX(120);
+        btn3.setLayoutY(360);
+        btn3.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent MouseEvent) {
+                Node a=tiledice.getChildren().get(0);
+                Node b=tiledice.getChildren().get(1);
+                Node c=tiledice.getChildren().get(3);
                 tiledice.getChildren().clear();
-                ImageView image=Tile.rotateImageinDice(dice1.get(2),100);
+                ImageView image=Tile.rotateImageinDice(dice1.get(2),320);
                 image.setRotate(90+90*sum2);
                 sum2++;
+                tiledice.getChildren().add(a);
+                tiledice.getChildren().add(b);
                 tiledice.getChildren().add(image);
-                System.out.println('1');
-//                for (int i=1;i<4;i++){
-//                    tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
-//                }
+                tiledice.getChildren().add(c);
+                System.out.println('3');
             }
         });
-        controls.getChildren().add(c);
+        controls.getChildren().add(btn3);
 
-        Node d=tiledice.getChildren().get(3);
-        d.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Button btn4=new Button("rotate");
+        btn4.setLayoutX(120);
+        btn4.setLayoutY(480);
+        btn4.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent MouseEvent) {
+                Node a=tiledice.getChildren().get(0);
+                Node b=tiledice.getChildren().get(1);
+                Node c=tiledice.getChildren().get(2);
                 tiledice.getChildren().clear();
-                ImageView image=Tile.rotateImageinDice(dice1.get(3),100);
+                ImageView image=Tile.rotateImageinDice(dice1.get(3),430);
                 image.setRotate(90+90*sum3);
                 sum3++;
+                tiledice.getChildren().add(a);
+                tiledice.getChildren().add(b);
+                tiledice.getChildren().add(c);
                 tiledice.getChildren().add(image);
-                System.out.println('1');
-//                for (int i=1;i<4;i++){
-//                    tiledice.getChildren().add(Tile.rotateImageinDice(dice1.get(i),100+110*i));
-//                }
+                System.out.println('4');
             }
         });
-        controls.getChildren().add(d);
+        controls.getChildren().add(btn4);
     }
 
     private void ClickDice(){

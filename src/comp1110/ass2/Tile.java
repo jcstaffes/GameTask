@@ -1,9 +1,13 @@
 package comp1110.ass2;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import comp1110.ass2.gui.Viewer;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -472,8 +476,5 @@ public class Tile {
         return image;
     }
 
-    public static ImageView newimage(ImageView oldimage){
 
-        return oldimage;
-    }
 }
