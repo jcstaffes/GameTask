@@ -12,10 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -185,7 +182,7 @@ public class Viewer extends Application {
 
 
 
-    private void rotateimage(){
+    public void rotateimage(){
         /**@author Jiamin Dai u6801714
          * rotate image under dice**/
         Button btn1=new Button("rotate");
@@ -277,6 +274,22 @@ public class Viewer extends Application {
         controls.getChildren().add(btn4);
     }
 
+    public void DragandDrop(){
+        tiledice.getChildren().get(0).setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Dragboard db=tiledice.getChildren().get(0).startDragAndDrop(TransferMode.ANY);
+
+                ClipboardContent content=new ClipboardContent();
+                Image iv=new Image("comp1110/ass2/gui/assets/" + dice1.get(0) + ".png");
+                content.putImage(iv);
+                db.setDragView(iv);
+
+                mouseEvent.consume();
+            }
+        });
+    }
+
     private void ClickDice(){
         /**@author u6801714 Jiamin Dai
         //         * add button
@@ -302,6 +315,7 @@ public class Viewer extends Application {
                     tiledice.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+110*i));
                 }
                 rotateimage();
+                DragandDrop();
             }
         });
 
