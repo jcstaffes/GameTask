@@ -183,32 +183,11 @@ public class Viewer extends Application {
     //A4A12B2B16A1B01A1B23S1B32A1A32B1B44B2A44A4C16A3D15A4D01A5D23A4E20B1F24A2F17A1F01B0G16A5C34A4C43A5C53A3D50A4D61S4E50A0F51A1F67S2E46B1E31A1F30A2G36A1G41B1G52
     //Test data to enter
 
-    /**click the image and rotate the image
-     * @author u6801714 Jiamin Dai
-     * **/
 
-    public void collectimage1(){
-//        Image c1 = new Image("comp1110/ass2/gui/assets/" + array.get(0) + ".png");
-//        Image c2 = new Image("comp1110/ass2/gui/assets/" + array.get(1) + ".png");
-//        Image c3 = new Image("comp1110/ass2/gui/assets/" + array.get(2) + ".png");
-//        Image c4 = new Image("comp1110/ass2/gui/assets/" + array.get(3) + ".png");
-//        Image s1 = new Image("comp1110/ass2/gui/assets/S" + 1+ ".png");
-//        Image s2 = new Image("comp1110/ass2/gui/assets/S" + 2+ ".png");
-//        Image s3 = new Image("comp1110/ass2/gui/assets/S" + 3+ ".png");
-//        Image s4 = new Image("comp1110/ass2/gui/assets/S" + 4+ ".png");
-//        Image s5 = new Image("comp1110/ass2/gui/assets/S" + 5+ ".png");
-//        Image s0 = new Image("comp1110/ass2/gui/assets/S" + 6+ ".png");
-        tiledice.getChildren().get(0).setOnDragDone(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-
-            }
-        });
-
-
-    }
 
     private void rotateimage(){
+        /**@author Jiamin Dai u6801714
+         * rotate image under dice**/
         Button btn1=new Button("rotate");
         btn1.setLayoutX(120);
         btn1.setLayoutY(120);
@@ -310,6 +289,10 @@ public class Viewer extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                sum=0;
+                sum1=0;
+                sum2=0;
+                sum3=0;
                 tiledice.getChildren().clear();
                 ArrayList<String> dice=new ArrayList<>();
                 dice=Tile.generateTile(RailroadInk.generateDiceRoll());
