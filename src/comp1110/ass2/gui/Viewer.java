@@ -202,10 +202,13 @@ public class Viewer extends Application {
     }
 
     public void clickdropanddrag(){
-        tiledice.getChildren().get(0).setOnMousePressed(new EventHandler<MouseEvent>() {
+        Button btn1=new Button();
+        btn1.setLayoutX(120);
+        btn1.setLayoutY(120);
+        btn1.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                tiledice.getChildren().get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
+                btn1.setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         setBoardtile(d.get(0),mouseEvent.getX(),mouseEvent.getY(),sum);
@@ -213,11 +216,14 @@ public class Viewer extends Application {
                 });
             }
         });
-
-        tiledice.getChildren().get(1).setOnMousePressed(new EventHandler<MouseEvent>() {
+        controls.getChildren().add(btn1);
+        Button btn2=new Button();
+        btn2.setLayoutX(120);
+        btn2.setLayoutY(220);
+        btn2.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                tiledice.getChildren().get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
+                btn2.setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         setBoardtile(d.get(1),mouseEvent.getX(),mouseEvent.getY(),sum1);
@@ -225,11 +231,14 @@ public class Viewer extends Application {
                 });
             }
         });
-
-        tiledice.getChildren().get(2).setOnMousePressed(new EventHandler<MouseEvent>() {
+        controls.getChildren().add(btn2);
+        Button btn3=new Button();
+        btn3.setLayoutX(120);
+        btn3.setLayoutY(320);
+        btn3.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                tiledice.getChildren().get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
+                btn3.setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         setBoardtile(d.get(2),mouseEvent.getX(),mouseEvent.getY(),sum2);
@@ -237,11 +246,14 @@ public class Viewer extends Application {
                 });
             }
         });
-
-        tiledice.getChildren().get(3).setOnMousePressed(new EventHandler<MouseEvent>() {
+        controls.getChildren().add(btn3);
+        Button btn4=new Button();
+        btn4.setLayoutX(120);
+        btn4.setLayoutY(420);
+        btn4.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                tiledice.getChildren().get(3).setOnMouseReleased(new EventHandler<MouseEvent>() {
+                btn4.setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         setBoardtile(d.get(3),mouseEvent.getX(),mouseEvent.getY(),sum3);
@@ -249,6 +261,54 @@ public class Viewer extends Application {
                 });
             }
         });
+        controls.getChildren().add(btn4);
+//        tiledice.getChildren().get(0).setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                tiledice.getChildren().get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
+//                    @Override
+//                    public void handle(MouseEvent mouseEvent) {
+//                        setBoardtile(d.get(0),mouseEvent.getX(),mouseEvent.getY(),sum);
+//                    }
+//                });
+//            }
+//        });
+//
+//        tiledice.getChildren().get(1).setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                tiledice.getChildren().get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
+//                    @Override
+//                    public void handle(MouseEvent mouseEvent) {
+//                        setBoardtile(d.get(1),mouseEvent.getX(),mouseEvent.getY(),sum1);
+//                    }
+//                });
+//            }
+//        });
+//
+//        tiledice.getChildren().get(2).setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                tiledice.getChildren().get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
+//                    @Override
+//                    public void handle(MouseEvent mouseEvent) {
+//                        setBoardtile(d.get(2),mouseEvent.getX(),mouseEvent.getY(),sum2);
+//                    }
+//                });
+//            }
+//        });
+//
+//        tiledice.getChildren().get(3).setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                tiledice.getChildren().get(3).setOnMouseReleased(new EventHandler<MouseEvent>() {
+//                    @Override
+//                    public void handle(MouseEvent mouseEvent) {
+//                        setBoardtile(d.get(3),mouseEvent.getX(),mouseEvent.getY(),sum3);
+//                    }
+//                });
+//            }
+//        });
 
 
     }
