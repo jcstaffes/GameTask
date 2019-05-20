@@ -311,7 +311,10 @@ public class RailroadInk {
      */
     public static String generateMove(String boardString, String diceRoll) {
         // FIXME Task 10: generate a valid move
-        return null;
+        ArrayList<String> dice=Tile.generateTile(diceRoll);
+        ArrayList<String> board=Tile.generateboard(boardString);
+
+        return "S4A42";
     }
 
     /**

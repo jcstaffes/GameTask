@@ -195,8 +195,8 @@ public class Viewer extends Application {
         iv.setImage(originalImage);
         iv.setFitHeight(100);
         iv.setFitWidth(100);
-        iv.setX(x);
-        iv.setY(y);
+        iv.setX(x-50);
+        iv.setY(y-50);
         iv.setRotate(90*s);
         boardtile.getChildren().add(iv);
     }
@@ -211,7 +211,7 @@ public class Viewer extends Application {
                 btn1.setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        setBoardtile(d.get(0),mouseEvent.getX(),mouseEvent.getY(),sum);
+                        setBoardtile(d.get(0),mouseEvent.getSceneX(),mouseEvent.getSceneY(),sum);
                     }
                 });
             }
@@ -226,7 +226,7 @@ public class Viewer extends Application {
                 btn2.setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        setBoardtile(d.get(1),mouseEvent.getX(),mouseEvent.getY(),sum1);
+                        setBoardtile(d.get(1),mouseEvent.getSceneX(),mouseEvent.getSceneY(),sum1);
                     }
                 });
             }
@@ -241,7 +241,7 @@ public class Viewer extends Application {
                 btn3.setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        setBoardtile(d.get(2),mouseEvent.getX(),mouseEvent.getY(),sum2);
+                        setBoardtile(d.get(2),mouseEvent.getSceneX(),mouseEvent.getSceneY(),sum2);
                     }
                 });
             }
@@ -256,7 +256,7 @@ public class Viewer extends Application {
                 btn4.setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        setBoardtile(d.get(3),mouseEvent.getX(),mouseEvent.getY(),sum3);
+                        setBoardtile(d.get(3),mouseEvent.getSceneX(),mouseEvent.getSceneY(),sum3);
                     }
                 });
             }

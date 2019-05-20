@@ -450,6 +450,18 @@ public class Tile {
         return image;
     }
 
+    public static ArrayList<String> generateboard(String b){
+        ArrayList<String> image=new ArrayList<>();
+        char[] str=new char[2];
+        for (int i=0;i<b.length()-1;i=i+5){
+            str[0]=b.charAt(i+2);
+            str[1]=b.charAt(i+3);
+            image.add(String.valueOf(str));
+        }
+        return image;
+    }
+
+
     public static ImageView rotateImageinDice(String assets,int line){
         Image originalImage = new Image("comp1110/ass2/gui/assets/" + assets + ".png");
         ImageView iv=new ImageView();
