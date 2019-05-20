@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -66,6 +67,7 @@ public class Viewer extends Application {
     private static int sum6=0;
     private static int sum7=0;
     private static int sum8=0;
+    private static int round=0;
     TextField textField;
 
 
@@ -376,9 +378,12 @@ public class Viewer extends Application {
         root.getChildren().add(tiledice);
         specialtile=Tile.specialtile();
         root.getChildren().add(specialtile);
+        Group text=new Group();
+        Text r=new Text();
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                text.getChildren().clear();
                 sum=0;
                 sum1=0;
                 sum2=0;
@@ -393,9 +398,18 @@ public class Viewer extends Application {
                 }
                 rotateimage();
                 clickdropanddrag();
+                round++;
+                r.setText("Round:"+round);
+                r.setX(50);
+                r.setY(700);
+                text.getChildren().add(r);
             }
         });
-
+        Text score=new Text("Score:");
+        score.setX(50);
+        score.setY(720);
+        root.getChildren().add(score);
+        root.getChildren().add(text);
         controls.getChildren().add(btn);
         root.getChildren().add(boardtile);
     }
