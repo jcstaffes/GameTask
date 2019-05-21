@@ -55,7 +55,7 @@ public class Viewer extends Application {
     private final Group lines = new Group();
     private static Group tiledice=new Group();
     private static Group boardtile=new Group();
-    private static Group specialtile=new Group();
+    public static Group specialtile=new Group();
     private static ArrayList<String> tilestring=new ArrayList<>();
     private static ArrayList<String> boardstring=new ArrayList<>();
     private static ArrayList<String> d=new ArrayList<>();
@@ -407,7 +407,6 @@ public class Viewer extends Application {
         System.out.println(boardstring);
         tilestring.clear();
         sum11++;
-        sum10++;
     }
 
     public void rotateimage(){
@@ -516,8 +515,12 @@ public class Viewer extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                rotateimage1();
-                clickanddrop1();
+                if (sum11>=3)
+                    Tile.specialtileblank();
+                else{
+                    rotateimage1();
+                    clickanddrop1();
+                }
                 text.getChildren().clear();
                 sum=0;
                 sum1=0;
