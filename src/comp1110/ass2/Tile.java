@@ -488,4 +488,16 @@ public class Tile {
         return image;
     }
 
+    public static ImageView setspecialtile(String s,double x,double y,int sum){
+        Image originalImage = new Image("comp1110/ass2/gui/assets/" + s+ ".png");
+        ImageView iv=new ImageView();
+        iv.setImage(originalImage);
+        iv.setFitHeight(100);
+        iv.setFitWidth(100);
+        iv.setX(x-50);
+        iv.setY(y-50);
+        iv.setRotate(90*sum);
+        return iv;
+    }
+
 }
