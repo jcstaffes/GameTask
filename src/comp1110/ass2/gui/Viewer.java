@@ -87,7 +87,7 @@ public class Viewer extends Application {
             List<String> pieces = new ArrayList<>();
 
             while (count <= (len - 1)) {
-                pieces.add(index, (" " + placement.charAt(count) + placement.charAt(count + 1) + placement.charAt(count + 2) + placement.charAt(count + 3) + placement.charAt(count + 4)));
+                pieces.add(index, ("" + placement.charAt(count) + placement.charAt(count + 1) + placement.charAt(count + 2) + placement.charAt(count + 3) + placement.charAt(count + 4)));
                 count += 5;
                 index += 1;
             }
