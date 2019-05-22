@@ -136,8 +136,20 @@ public class RailroadInk {
     public static boolean isValidPlacementSequence(String boardString) {
         // FIXME Task 6: determine whether the given placement sequence is valid
         //List allTiles = Viewer.breakPlacementStringToPieces(boardString);
-
-
+        ArrayList<String> tilestring=new ArrayList<>();
+        for (int i=0;i<boardString.length()/5;i=i+5){
+            tilestring.add(boardString.substring(i,i+5));
+        }
+        String[] board=new String[boardString.length()/5];
+        for (int i=0,j=0;i<boardString.length();i=i+5,j++){
+            board[j]=boardString.substring(i+2,i+4);
+        }
+        for (int i=0;i<board.length;i++){
+            for (int j=i+1;j<board.length;j++)
+                if (board[i].equals(board[j])){
+                    return false;
+                }
+        }
         if (isBoardStringWellFormed(boardString)){
             int amount = (boardString.length()/5);
             char ro1 = boardString.charAt(2);
@@ -145,7 +157,7 @@ public class RailroadInk {
             if (!((ro1=='A'&&co1=='1')||(ro1=='A'&&co1=='3')||(ro1=='A'&&co1=='5')||(ro1=='B'&&co1=='0')||(ro1=='B'&&co1=='6')||(ro1=='D'&&co1=='0')||(ro1=='D'&&co1=='6')||(ro1=='F'&&co1=='0')||(ro1=='F'&&co1=='6')||(ro1=='G'&&co1=='1')||(ro1=='G'&&co1=='3')||(ro1=='G'&&co1=='5'))){
                 return false;
             }
-                loop2:
+              loop2:
                 for (int i = 0;i<(amount);i++){
                     loop1:
                     for (int j = i;j>=0;j--){
