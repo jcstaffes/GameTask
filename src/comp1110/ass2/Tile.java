@@ -48,10 +48,10 @@ public class Tile {
      * @author Brodie Osborne (u5828619)
      */
     public static Tile makeTileFromString(String tileString) {
-        String tileID = "" + tileString.charAt(1) + tileString.charAt(2);
-        char row = tileString.charAt(3);
-        char col = tileString.charAt(4);
-        int orient = Integer.parseInt(String.valueOf(tileString.charAt(5)));
+        String tileID = "" + tileString.charAt(0) + tileString.charAt(1);
+        char row = tileString.charAt(2);
+        char col = tileString.charAt(3);
+        int orient = Integer.parseInt(String.valueOf(tileString.charAt(4)));
         return new Tile(tileID, orient, col, row);
     }
 
@@ -500,9 +500,18 @@ public class Tile {
             Viewer.specialtile.getChildren().add(i,iv);
         }
     }
-    public static void specialtileblank1(){
-        for (int i=0;i<6;i++){
 
+    public static void getspecialtileback(){
+        for (int i=0;i<6;i++){
+            Viewer.specialtile.getChildren().remove(i);
+            Image originalImage = new Image("comp1110/ass2/gui/assets/S" + i+ ".png");
+            ImageView iv=new ImageView();
+            iv.setImage(originalImage);
+            iv.setFitHeight(100);
+            iv.setFitWidth(100);
+            iv.setX(890);
+            iv.setY(10+110*i);
+            Viewer.specialtile.getChildren().add(i,iv);
         }
     }
 
