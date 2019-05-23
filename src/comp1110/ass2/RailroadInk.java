@@ -278,15 +278,36 @@ public class RailroadInk {
     }
 
     public static Boolean IsConnectExit(String tilepiece){
-        char[] chars0 = tilepiece.toCharArray();
-        if ((chars0[2] == 'A' && chars0[3] == '1') || (chars0[2] == 'A' && chars0[3] == '3') || (chars0[2] == 'A' && chars0[3] == '5') || (chars0[2] == 'B' && chars0[3] == '0') || (chars0[2] == 'B' && chars0[3] == '6') || (chars0[2] == 'D' && chars0[3] == '0') || (chars0[2] == 'D' && chars0[3] == '6') || (chars0[2] == 'F' && chars0[3] == '0') || (chars0[2] == 'F' && chars0[3] == '6') || (chars0[2] == 'G' && chars0[3] == '1') || (chars0[2] == 'G' && chars0[3] == '3') || (chars0[2] == 'G' && chars0[3] == '5')){
-            return true;
-        }
+        if (tilepiece=="") return false;
         else {
-            return false;
+            char[] chars0 = tilepiece.toCharArray();
+            if ((chars0[2] == 'A' && chars0[3] == '1') || (chars0[2] == 'A' && chars0[3] == '3') || (chars0[2] == 'A' && chars0[3] == '5') || (chars0[2] == 'B' && chars0[3] == '0') || (chars0[2] == 'B' && chars0[3] == '6') || (chars0[2] == 'D' && chars0[3] == '0') || (chars0[2] == 'D' && chars0[3] == '6') || (chars0[2] == 'F' && chars0[3] == '0') || (chars0[2] == 'F' && chars0[3] == '6') || (chars0[2] == 'G' && chars0[3] == '1') || (chars0[2] == 'G' && chars0[3] == '3') || (chars0[2] == 'G' && chars0[3] == '5')){
+                return true;
+            }
+            else {
+                return false;
+            }
         }
+
     }
 
+//    public static Boolean IsEndAtEdge(String tilepiece){
+//        char[] chars = tilepiece.toCharArray();
+//        String Connection = Tile.tileReset(tilepiece);
+//        char[] chars1 = Connection.toCharArray();
+//
+//        if (chars[2]=='A'&&chars1[0]!='N') return true;
+//        else if (chars[2]=='G'&&chars1[2]!='N') return true;
+//        if (chars[3]=='0'&&chars1[1]!='N') return true;
+//        else if ()
+//    }
+
+    public String KindofRoad(String StrA,String StrB){
+        char[] chars = StrA.toCharArray();
+        String road = new String();
+
+        return  road;
+    }
     /**
      * Given the current state of a game board, output an integer representing the sum of all the following factors
      * that contribute to the player's final score.
@@ -337,7 +358,10 @@ public class RailroadInk {
             char[] d1 = direction.toCharArray();
             int errorSide = 4;
             char[] chars0 = StrA[i].toCharArray();
-            if (chars0[2]=='A'||chars0[2]=='G'||chars0[3]=='0'||chars0[3]=='6'){
+            if (chars0[2]=='A'||chars0[2]=='G'){
+                errorSide--;
+            }
+            if (chars0[3]=='0'||chars0[3]=='6'){
                 errorSide--;
             }
             for (int j=0;j<4;j++){
@@ -371,7 +395,7 @@ public class RailroadInk {
 
         for (int i=0;i<tilenumber;i++){
             if (StrA[i]!="") {
-//                if (RailroadInk.IsConnectExit(StrA[i])) {
+                if (RailroadInk.IsConnectExit(StrA[i])) {
 //                    ExitNum++;
                 StrB[i] = StrA[i];
                 StrA[i] = "";
@@ -388,7 +412,7 @@ public class RailroadInk {
                         }
                     }
 
-                    // }
+                     }
 
                 }
                 score = score + 4 * (ExitNum - 1);

@@ -48,10 +48,10 @@ public class Tile {
      * @author Brodie Osborne (u5828619)
      */
     public static Tile makeTileFromString(String tileString) {
-        String tileID = "" + tileString.charAt(1) + tileString.charAt(2);
-        char row = tileString.charAt(3);
-        char col = tileString.charAt(4);
-        int orient = Integer.parseInt(String.valueOf(tileString.charAt(5)));
+        String tileID = "" + tileString.charAt(0) + tileString.charAt(1);
+        char row = tileString.charAt(2);
+        char col = tileString.charAt(3);
+        int orient = Integer.parseInt(String.valueOf(tileString.charAt(4)));
         return new Tile(tileID, orient, col, row);
     }
 
