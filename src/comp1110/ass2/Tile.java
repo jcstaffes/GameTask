@@ -22,7 +22,8 @@ public class Tile {
     public ImageView imgview;
 
 
-    /**
+
+        /**
      * Constructor for a tile
      *
      * @param tileID   This refers to the ID of the tile. Also refers to the X.png of the file name.
@@ -40,6 +41,7 @@ public class Tile {
         this.neighbourGrids = getNeighbours(row, column);
         this.imgview = getImage(this);
     }
+
 
     /**
      * Creates a tile object from a valid placement string
@@ -437,6 +439,7 @@ public class Tile {
     }
 
     /**generate tile id to get image,use generatediceroll
+     * All these methods are to solve the problem in Viewer
      * @author u6801714 Jiamin Dai**/
 
     public static ArrayList<String> generateTile(String d){
@@ -526,5 +529,7 @@ public class Tile {
         iv.setRotate(90*sum);
         return iv;
     }
+
+
 
 }
