@@ -103,30 +103,36 @@ public class RailroadInk {
      * **/
     public static boolean areConnectedNeighbours(String tilePlacementStringA, String tilePlacementStringB) {
         //  @author Jiamin Dai(u6801714)
-        String strA=Tile.tileReset(tilePlacementStringA);
-        String strB=Tile.tileReset(tilePlacementStringB);
-        char rowA=tilePlacementStringA.charAt(2);
-        char rowB=tilePlacementStringB.charAt(2);
-        char colA=tilePlacementStringA.charAt(3);
-        char colB=tilePlacementStringB.charAt(3);
-        if (rowA==rowB){
-            if (colA==colB-1&&strA.charAt(3)==strB.charAt(1)&&strA.charAt(3)!='N')
-                return true;
-            else if (colA==colB+1&&strA.charAt(1)==strB.charAt(3)&&strA.charAt(1)!='N')
-                return true;
-            else
-                return false;
-        }
-        else if (colA==colB){
-            if (rowA==rowB+1&&strA.charAt(0)==strB.charAt(2)&&strB.charAt(2)!='N')
-                return true;
-            else if (rowA==rowB-1&&strA.charAt(2)==strB.charAt(0)&&strB.charAt(0)!='N')
-                return true;
-            else
-                return false;
-        }
-        else
+        if (tilePlacementStringA==""||tilePlacementStringB==""){
             return false;
+        }
+        else {
+            String strA=Tile.tileReset(tilePlacementStringA);
+            String strB=Tile.tileReset(tilePlacementStringB);
+            char rowA=tilePlacementStringA.charAt(2);
+            char rowB=tilePlacementStringB.charAt(2);
+            char colA=tilePlacementStringA.charAt(3);
+            char colB=tilePlacementStringB.charAt(3);
+            if (rowA==rowB){
+                if (colA==colB-1&&strA.charAt(3)==strB.charAt(1)&&strA.charAt(3)!='N')
+                    return true;
+                else if (colA==colB+1&&strA.charAt(1)==strB.charAt(3)&&strA.charAt(1)!='N')
+                    return true;
+                else
+                    return false;
+            }
+            else if (colA==colB){
+                if (rowA==rowB+1&&strA.charAt(0)==strB.charAt(2)&&strB.charAt(2)!='N')
+                    return true;
+                else if (rowA==rowB-1&&strA.charAt(2)==strB.charAt(0)&&strB.charAt(0)!='N')
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
 //        if(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1&&str3.charAt(1)==str4.charAt(3)&&str3.charAt(1)!='N')
 //                return true;
 //        else if (tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)+1&&str3.charAt(0)==str4.charAt(2)&&str3.charAt(0)!='N')
@@ -271,6 +277,16 @@ public class RailroadInk {
         return "A"+rand.nextInt(6)+"A"+rand.nextInt(6)+"A"+rand.nextInt(6)+"B"+rand.nextInt(3);
     }
 
+    public static Boolean IsConnectExit(String tilepiece){
+        char[] chars0 = tilepiece.toCharArray();
+        if ((chars0[2] == 'A' && chars0[3] == '1') || (chars0[2] == 'A' && chars0[3] == '3') || (chars0[2] == 'A' && chars0[3] == '5') || (chars0[2] == 'B' && chars0[3] == '0') || (chars0[2] == 'B' && chars0[3] == '6') || (chars0[2] == 'D' && chars0[3] == '0') || (chars0[2] == 'D' && chars0[3] == '6') || (chars0[2] == 'F' && chars0[3] == '0') || (chars0[2] == 'F' && chars0[3] == '6') || (chars0[2] == 'G' && chars0[3] == '1') || (chars0[2] == 'G' && chars0[3] == '3') || (chars0[2] == 'G' && chars0[3] == '5')){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     /**
      * Given the current state of a game board, output an integer representing the sum of all the following factors
      * that contribute to the player's final score.
@@ -286,56 +302,105 @@ public class RailroadInk {
         // FIXME Task 8: compute the basic score
         int score = 0;
         List<String> piece0 = new ArrayList<>();
-        String str8 = new String();
+        String str1 = new String();
         int ExitNum = 0;
         int ErrorNum = 0;
         piece0 = Viewer.breakPlacementStringToPieces(boardString);
+        int tilenumber = boardString.length()/5;
 
-        if (boardString==null) return 0;
 
         for (int i = 0;i<piece0.size();i++){
             String tile1 = piece0.get(i);
             char[] t1 = tile1.toCharArray();
-            if (t1[3]=='C'||t1[3]=='D'||t1[3]=='E') {
-                if (t1[4] == '2'||t1[4] == '3'||t1[4]=='4') {
+            if (t1[2]=='C'||t1[2]=='D'||t1[2]=='E') {
+                if (t1[3] == '2'||t1[3] == '3'||t1[3]=='4') {
                     score++;
                 }
             }
         }
+        System.out.println("score: "+score);
 
 
-        for (int i = 0;i<(boardString.length()/5);i++){
-            if (piece0!=null){
-                for (int j=0;j<boardString.length()/5;j++){
-                    if (piece0!=null&&piece0.size()>j) {
-                        List<String> piece1 = piece0;
-                        String checktile = piece0.get(j);
-                        char[] chars0 = checktile.toCharArray();
-                        if ((chars0[2] == 'A' && chars0[3] == '1') || (chars0[2] == 'A' && chars0[3] == '3') || (chars0[2] == 'A' && chars0[3] == '5') || (chars0[2] == 'B' && chars0[3] == '0') || (chars0[2] == 'B' && chars0[3] == '6') || (chars0[2] == 'D' && chars0[3] == '0') || (chars0[2] == 'D' && chars0[3] == '6') || (chars0[2] == 'F' && chars0[3] == '0') || (chars0[2] == 'F' && chars0[3] == '6') || (chars0[2] == 'G' && chars0[3] == '1') || (chars0[2] == 'G' && chars0[3] == '3') || (chars0[2] == 'G' && chars0[3] == '5')) {
-                            ExitNum++;
-                            piece0.remove(j);
-                            int savej = j;
-                            j--;
-                        }
-                        String tile1 = checktile;
-                        for (int k=0;k<piece0.size();k++){
-                            String tile2 = piece0.get(k);
-                            char[] chars = tile2.toCharArray();
-                            if (true/*areConnectedNeighbours(tile1,tile2)*/){
-                                tile1 = tile2;
-                                if ((chars[2]=='A'&&chars[3]=='1')||(chars[2]=='A'&&chars[3]=='3')||(chars[2]=='A'&&chars[3]=='5')||(chars[2]=='B'&&chars[3]=='0')||(chars[2]=='B'&&chars[3]=='6')||(chars[2]=='D'&&chars[3]=='0')||(chars[2]=='D'&&chars[3]=='6')||(chars[2]=='F'&&chars[3]=='0')||(chars[2]=='F'&&chars[3]=='6')||(chars[2]=='G'&&chars[3]=='1')||(chars[2]=='G'&&chars[3]=='3')||(chars[2]=='G'&&chars[3]=='5')) {
-                                    ExitNum++;
-                                    piece0.remove(k);
-                                    k--;
-                                }
+
+
+        String[] StrA = new String[tilenumber];
+        String[] StrB = new String[tilenumber];
+        String[] StrC = new String[tilenumber];
+        for (int i = 0; i<tilenumber;i++){
+            StrA[i] = piece0.get(i);
+            StrC[i] = piece0.get(i);
+            StrB[i] = "";
+        }
+
+        for (int i=0;i<tilenumber;i++){
+            String direction = Tile.tileReset(StrA[i]);
+            char[] d1 = direction.toCharArray();
+            int errorSide = 4;
+            char[] chars0 = StrA[i].toCharArray();
+            if (chars0[2]=='A'||chars0[2]=='G'||chars0[3]=='0'||chars0[3]=='6'){
+                errorSide--;
+            }
+            for (int j=0;j<4;j++){
+                if (d1[j]=='N'){
+                    if (j==0&&chars0[2]=='A'){
+                        errorSide=errorSide+0;
+                    }
+                    else if (j==1&&chars0[3]=='0'){
+                        errorSide=errorSide+0;
+                    }
+                    else if (j==2&&chars0[2]=='G'){
+                        errorSide=errorSide+0;
+                    }
+                    else if (j==3&&chars0[3]=='6'){
+                        errorSide=errorSide+0;
+                    }
+                    else {
+                        errorSide--;
+                    }
+                }
+            }
+            for (int k=0;k<tilenumber;k++){
+                if (RailroadInk.areConnectedNeighbours(StrA[i],StrC[k])) errorSide--;
+            }
+//            if (errorSide>0){
+//                System.out.println(StrA[i]);
+//            }
+//            System.out.println("ErrorNum: "+ErrorNum);
+            ErrorNum = ErrorNum+errorSide;
+        }
+
+        for (int i=0;i<tilenumber;i++){
+            if (StrA[i]!="") {
+//                if (RailroadInk.IsConnectExit(StrA[i])) {
+//                    ExitNum++;
+                StrB[i] = StrA[i];
+                StrA[i] = "";
+                for (int j = 0; j < tilenumber; j++) {
+                    for (int k=0;k<tilenumber;k++){
+                        if (RailroadInk.areConnectedNeighbours(StrB[j], StrA[k])) {
+                            if (RailroadInk.IsConnectExit(StrA[k])) {
+                                System.out.println(StrA[k]);
+                                ExitNum++;
                             }
+                            StrB[k] = StrA[k];
+                            StrA[k] = "";
+                            j=0;
                         }
                     }
 
+                    // }
 
                 }
+                score = score + 4 * (ExitNum - 1);
+                ExitNum = 0;
+                for (int l=0;l<tilenumber;l++){
+                    StrB[l]="";
+                }
             }
+
         }
+
+        score = score-ErrorNum;
 
         return score;
     }
