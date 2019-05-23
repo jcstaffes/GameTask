@@ -192,7 +192,9 @@ public class Viewer extends Application {
 
     //A4A12B2B16A1B01A1B23S1B32A1A32B1B44B2A44A4C16A3D15A4D01A5D23A4E20B1F24A2F17A1F01B0G16A5C34A4C43A5C53A3D50A4D61S4E50A0F51A1F67S2E46B1E31A1F30A2G36A1G41B1G52
     //Test data to enter
-
+    /**
+     * After this,all these methods are done by
+     * @author Jiamin Dai u6801714**/
     public void exit(){
         Image image=new Image("comp1110/ass2/gui/assets/HighExit.png");
         Image image1=new Image("comp1110/ass2/gui/assets/RailExit.png");
@@ -250,6 +252,12 @@ public class Viewer extends Application {
             specialtile.getChildren().add(5,Board.coverthetile(890,560));
         }
     }
+    /**
+     * drop and drag tiledice&specialtile
+     * the String tiles is to get the five character which is tile in the board,and add the tile to the boardstring
+     * if the placement is not valid,the boardstring will remove tiles
+     * @author Jiamin Dai u6801714
+     * **/
     public void clickdropanddrag(){
         tiledice.getChildren().get(0).setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -463,8 +471,9 @@ public class Viewer extends Application {
         }
         return ListString;
     }
-
-
+    /**rotate image,use scroll
+     * @author Jiamin Dai u6801714
+     * **/
     public void rotateimage(){
         /**@author Jiamin Dai u6801714
          * rotate image under dice**/
@@ -558,7 +567,8 @@ public class Viewer extends Application {
     private void ClickDice(){
         /**@author u6801714 Jiamin Dai
         //         * add button
-        //         * **/
+        //         * click dice button and there will be get generatedice method and have four image
+         **/
         Button btn = new Button("Dice");
         btn.setLayoutX(50);
         btn.setLayoutY(50);

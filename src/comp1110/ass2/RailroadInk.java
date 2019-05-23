@@ -168,7 +168,7 @@ public class RailroadInk {
      */
     public static boolean isValidPlacementSequence(String boardString) {
         // FIXME Task 6: determine whether the given placement sequence is valid
-        int k=0;
+
         String[] board=new String[boardString.length()/5];
         for (int i=0,j=0;i<boardString.length();i=i+5,j++){
             board[j]=boardString.substring(i+2,i+4);
@@ -179,9 +179,9 @@ public class RailroadInk {
                     return false;
                 }
         }
-//        List allTiles = Viewer.breakPlacementStringToPieces(boardString);
+        List allTiles = Viewer.breakPlacementStringToPieces(boardString);
 
-//
+
         if (isBoardStringWellFormed(boardString)){
             int amount = (boardString.length()/5);
             String s=boardString.substring(2,4);
@@ -240,14 +240,17 @@ public class RailroadInk {
                                 else if (ro=='G'&&co=='5'){
                                     if (con.charAt(2)=='R') return false;
                                 }
+                                else if(tile1.equals(tile2)){
+                                    break;
+                                }
                                 else if (((ro==ro2)&&(co==(co2-1)))||((ro==ro2)&&(co==(co2+1)))||((co==co2)&&(ro==(ro2-1)))||((co==co2)&&(ro==(ro2+1)))){
                                     if (areConnectedNeighbours(tile1,tile2)){
                                         break loop1;
                                     }
                                 }
-//                                else {
-//                                    return false;
-//                                }
+                                else {
+                                    return false;
+                                }
                         }
                     }
                 }
@@ -300,10 +303,7 @@ public class RailroadInk {
                 }
             }
         }
-
-
-        return true;
-    }
+        return true;}
 
     /**
      * Generate a random dice roll as a string of eight characters.
