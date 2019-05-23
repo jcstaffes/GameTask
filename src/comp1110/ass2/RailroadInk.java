@@ -97,24 +97,51 @@ public class RailroadInk {
      * @return true if the placements are connected neighbours
      */
 
+    /**
+     *     0
+     *   1  3
+     *    2
+     * **/
     public static boolean areConnectedNeighbours(String tilePlacementStringA, String tilePlacementStringB) {
         //  @author Jiamin Dai(u6801714)
-        String str3=Tile.tileReset(tilePlacementStringA);
-        String str4=Tile.tileReset(tilePlacementStringB);
-        if(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1&&str3.charAt(1)==str4.charAt(3)&&str3.charAt(1)!='N')
+        String strA=Tile.tileReset(tilePlacementStringA);
+        String strB=Tile.tileReset(tilePlacementStringB);
+        char rowA=tilePlacementStringA.charAt(2);
+        char rowB=tilePlacementStringB.charAt(2);
+        char colA=tilePlacementStringA.charAt(3);
+        char colB=tilePlacementStringB.charAt(3);
+        if (rowA==rowB){
+            if (colA==colB-1&&strA.charAt(3)==strB.charAt(1)&&strA.charAt(3)!='N')
                 return true;
-        else if (tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)+1&&str3.charAt(0)==str4.charAt(2)&&str3.charAt(0)!='N')
+            else if (colA==colB+1&&strA.charAt(1)==strB.charAt(3)&&strA.charAt(1)!='N')
                 return true;
-        else if (tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)-1&&str3.charAt(3)==str4.charAt(1)&&str3.charAt(3)!='N')
+            else
+                return false;
+        }
+        else if (colA==colB){
+            if (rowA==rowB+1&&strA.charAt(0)==strB.charAt(2)&&strB.charAt(2)!='N')
                 return true;
-        else if(tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)-1&&str3.charAt(2)==str4.charAt(0)&&str3.charAt(2)!='N')
+            else if (rowA==rowB-1&&strA.charAt(2)==strB.charAt(0)&&strB.charAt(0)!='N')
                 return true;
-        else if(str3.charAt(2)==str4.charAt(0)&&str3.charAt(0)==str4.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&str3.charAt(2)!='N'&&str3.charAt(0)!='N'&&(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)+1||tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)-1))
-            return true;
-        else if(str3.charAt(1)==str4.charAt(3)&&str3.charAt(3)==str4.charAt(1)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&str3.charAt(1)!='N'&&str3.charAt(4)!='N'&&(tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1||tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)-1))
-            return true;
+            else
+                return false;
+        }
         else
             return false;
+//        if(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1&&str3.charAt(1)==str4.charAt(3)&&str3.charAt(1)!='N')
+//                return true;
+//        else if (tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)+1&&str3.charAt(0)==str4.charAt(2)&&str3.charAt(0)!='N')
+//                return true;
+//        else if (tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)-1&&str3.charAt(3)==str4.charAt(1)&&str3.charAt(3)!='N')
+//                return true;
+//        else if(tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)-1&&str3.charAt(2)==str4.charAt(0)&&str3.charAt(2)!='N')
+//                return true;
+//        else if(str3.charAt(2)==str4.charAt(0)&&str3.charAt(0)==str4.charAt(2)&&tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)&&str3.charAt(2)!='N'&&str3.charAt(0)!='N'&&(tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)+1||tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)-1))
+//            return true;
+//        else if(str3.charAt(1)==str4.charAt(3)&&str3.charAt(3)==str4.charAt(1)&&tilePlacementStringA.charAt(2)==tilePlacementStringB.charAt(2)&&str3.charAt(1)!='N'&&str3.charAt(3)!='N'&&(tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)+1||tilePlacementStringA.charAt(3)==tilePlacementStringB.charAt(3)-1))
+//            return true;
+//        else
+//            return false;
     }
 
     /**
