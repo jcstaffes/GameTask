@@ -500,9 +500,18 @@ public class Tile {
             Viewer.specialtile.getChildren().add(i,iv);
         }
     }
-    public static void specialtileblank1(){
-        for (int i=0;i<6;i++){
 
+    public static void getspecialtileback(){
+        for (int i=0;i<6;i++){
+            Viewer.specialtile.getChildren().remove(i);
+            Image originalImage = new Image("comp1110/ass2/gui/assets/S" + i+ ".png");
+            ImageView iv=new ImageView();
+            iv.setImage(originalImage);
+            iv.setFitHeight(100);
+            iv.setFitWidth(100);
+            iv.setX(890);
+            iv.setY(10+110*i);
+            Viewer.specialtile.getChildren().add(i,iv);
         }
     }
 

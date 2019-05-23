@@ -56,7 +56,7 @@ public class Viewer extends Application {
     private static Group tiledice=new Group();
     private static Group boardtile=new Group();
     public static Group specialtile=new Group();
-    private static ArrayList<String> tilestring=new ArrayList<>();
+    private static ArrayList<Integer> specialblank=new ArrayList<>();
     private static ArrayList<String> boardstring=new ArrayList<>();
     private static ArrayList<String> d=new ArrayList<>();
     private static int sum=0;
@@ -85,7 +85,6 @@ public class Viewer extends Application {
             int index = 0;
             int len = placement.length();
             List<String> pieces = new ArrayList<>();
-
             while (count <= (len - 1)) {
                 pieces.add(index, ("" + placement.charAt(count) + placement.charAt(count + 1) + placement.charAt(count + 2) + placement.charAt(count + 3) + placement.charAt(count + 4)));
                 count += 5;
@@ -139,7 +138,6 @@ public class Viewer extends Application {
             String piece = item.toString();
             Tile tile = Tile.makeTileFromString(piece);
             ImageView iv = tile.imgview;
-
             iv.setPreserveRatio(true);
             iv.setSmooth(true);
 
@@ -225,8 +223,33 @@ public class Viewer extends Application {
         iv.setRotate(90*s);
         boardtile.getChildren().add(iv);
     }
-
-
+    public void specialtileblank1(){
+        Tile.getspecialtileback();
+        if (specialblank.contains(0)){
+            specialtile.getChildren().remove(0);
+            specialtile.getChildren().add(0, Board.coverthetile(890, 10));
+        }
+        if (specialblank.contains(1)){
+            specialtile.getChildren().remove(1);
+            specialtile.getChildren().add(1,Board.coverthetile(890,120));
+        }
+        if (specialblank.contains(2)){
+            specialtile.getChildren().remove(2);
+            specialtile.getChildren().add(2,Board.coverthetile(890,230));
+        }
+        if (specialblank.contains(3)){
+            specialtile.getChildren().remove(3);
+            specialtile.getChildren().add(3,Board.coverthetile(890,340));
+        }
+        if (specialblank.contains(4)){
+            specialtile.getChildren().remove(4);
+            specialtile.getChildren().add(4,Board.coverthetile(890,450));
+        }
+        if (specialblank.contains(5)){
+            specialtile.getChildren().remove(5);
+            specialtile.getChildren().add(5,Board.coverthetile(890,560));
+        }
+    }
     public void clickdropanddrag(){
         tiledice.getChildren().get(0).setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -234,14 +257,15 @@ public class Viewer extends Application {
                 tiledice.getChildren().get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        setBoardtile(d.get(0),setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum);
-                        tilestring.add(d.get(0));
-                        tilestring.add(Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY())));
-                        tilestring.add(String.valueOf(sum%8));
-                        boardstring.add(tilestring.toString());
-                        tilestring.clear();
-                        tiledice.getChildren().remove(0);
-                        tiledice.getChildren().add(0,Board.coverthetile(20,100));
+                        String tiles=d.get(0)+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum%8;
+                        boardstring.add(tiles);
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
+                            setBoardtile(d.get(0),setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum);
+                            tiledice.getChildren().remove(0);
+                            tiledice.getChildren().add(0,Board.coverthetile(20,100));
+                        }
+                        else {boardstring.remove(tiles);
+                            System.out.println("tile");}
                     }
                 });
             }
@@ -253,14 +277,14 @@ public class Viewer extends Application {
                 tiledice.getChildren().get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        setBoardtile(d.get(1),setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum1);
-                        tilestring.add(d.get(1));
-                        tilestring.add(Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY())));
-                        tilestring.add(String.valueOf(sum1%8));
-                        boardstring.add(tilestring.toString());
-                        tilestring.clear();
-                        tiledice.getChildren().remove(1);
-                        tiledice.getChildren().add(1,Board.coverthetile(20,210));
+                        String tiles=d.get(1)+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum1%8;
+                        boardstring.add(tiles);
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
+                            setBoardtile(d.get(1),setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum1);
+                            tiledice.getChildren().remove(1);
+                            tiledice.getChildren().add(1,Board.coverthetile(20,210));
+                        }
+                        else {boardstring.remove(tiles); }
                     }
                 });
             }
@@ -272,14 +296,14 @@ public class Viewer extends Application {
                 tiledice.getChildren().get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        setBoardtile(d.get(2),setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum2);
-                        tilestring.add(d.get(2));
-                        tilestring.add(Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY())));
-                        tilestring.add(String.valueOf(sum2%8));
-                        boardstring.add(tilestring.toString());
-                        tilestring.clear();
-                        tiledice.getChildren().remove(2);
-                        tiledice.getChildren().add(2,Board.coverthetile(20,320));
+                        String tiles=d.get(2)+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum2%8;
+                        boardstring.add(tiles);
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
+                            setBoardtile(d.get(2),setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum2);
+                            tiledice.getChildren().remove(2);
+                            tiledice.getChildren().add(2,Board.coverthetile(20,320));
+                        }
+                        else {boardstring.remove(tiles); }
                     }
                 });
             }
@@ -291,14 +315,14 @@ public class Viewer extends Application {
                 tiledice.getChildren().get(3).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        setBoardtile(d.get(3),setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum3);
-                        tilestring.add(d.get(3));
-                        tilestring.add(Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY())));
-                        tilestring.add(String.valueOf(sum3%8));
-                        boardstring.add(tilestring.toString());
-                        tilestring.clear();
-                        tiledice.getChildren().remove(3);
-                        tiledice.getChildren().add(3,Board.coverthetile(20,430));
+                        String tiles=d.get(3)+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum3%8;
+                        boardstring.add(tiles);
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
+                            setBoardtile(d.get(3),setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum3);
+                            tiledice.getChildren().remove(3);
+                            tiledice.getChildren().add(3,Board.coverthetile(20,430));
+                        }
+                        else {boardstring.remove(tiles); }
                     }
                 });
             }
@@ -314,11 +338,20 @@ public class Viewer extends Application {
                 specialtile.getChildren().get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        boardtile.getChildren().add(Tile.setspecialtile("S0",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum4));
-                        savetileandboard("S0",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum4);
-                        specialtile.getChildren().remove(0);
-                        specialtile.getChildren().add(0,Board.coverthetile(890,10));
-                    }
+                        String tiles="S0"+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum4%8;
+                        boardstring.add(tiles);
+                        sum11++;
+                            if (RailroadInk.isValidPlacementSequence(savetileandboard())) {
+                                boardtile.getChildren().add(Tile.setspecialtile("S0", setonboardx(mouseEvent.getSceneX()), setonboardy(mouseEvent.getSceneY()), sum4));
+                                specialblank.add(0);
+                                Tile.specialtileblank();
+                            }
+                            else{
+                                boardstring.remove(tiles);
+                                System.out.println("special");
+                                System.out.println(savetileandboard());
+                            }
+                        }
                 });
             }
         });
@@ -329,10 +362,15 @@ public class Viewer extends Application {
                 specialtile.getChildren().get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        boardtile.getChildren().add(Tile.setspecialtile("S1",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum5));
-                        savetileandboard("S1",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum5);
-                        specialtile.getChildren().remove(1);
-                        specialtile.getChildren().add(1,Board.coverthetile(890,120));
+                        String tiles="S1"+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum5%8;
+                        boardstring.add(tiles);
+                        sum11++;
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
+                            boardtile.getChildren().add(Tile.setspecialtile("S1",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum5));
+                            specialblank.add(1);
+                            Tile.specialtileblank();
+                        }
+                        else{ boardstring.remove(tiles); }
                     }
                 });
             }
@@ -344,10 +382,14 @@ public class Viewer extends Application {
                 specialtile.getChildren().get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
+                        String tiles="S2"+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum6%8;
+                        boardstring.add(tiles);
+                        sum11++;
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
                         boardtile.getChildren().add(Tile.setspecialtile("S2",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum6));
-                        savetileandboard("S2",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum6);
-                        specialtile.getChildren().remove(2);
-                        specialtile.getChildren().add(2,Board.coverthetile(890,230));
+                        specialblank.add(2);
+                        Tile.specialtileblank();}
+                        else{ boardstring.remove(tiles); }
                     }
                 });
             }
@@ -359,10 +401,15 @@ public class Viewer extends Application {
                 specialtile.getChildren().get(3).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        boardtile.getChildren().add(Tile.setspecialtile("S3",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum7));
-                        savetileandboard("S3",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum7);
-                        specialtile.getChildren().remove(3);
-                        specialtile.getChildren().add(3,Board.coverthetile(890,340));
+                        String tiles="S3"+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum7%8;
+                        boardstring.add(tiles);
+                        sum11++;
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
+                            boardtile.getChildren().add(Tile.setspecialtile("S3",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum7));
+                            specialblank.add(3);
+                            Tile.specialtileblank();
+                            }
+                        else{ boardstring.remove(tiles); }
                     }
                 });
             }
@@ -374,10 +421,15 @@ public class Viewer extends Application {
                 specialtile.getChildren().get(4).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        boardtile.getChildren().add(Tile.setspecialtile("S4",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum8));
-                        savetileandboard("S4",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum8);
-                        specialtile.getChildren().remove(4);
-                        specialtile.getChildren().add(4,Board.coverthetile(890,450));
+                        String tiles="S4"+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum8%8;
+                        boardstring.add(tiles);
+                        sum11++;
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
+                            boardtile.getChildren().add(Tile.setspecialtile("S4",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum8));
+                            specialblank.add(4);
+                            Tile.specialtileblank();
+                        }
+                        else{ boardstring.remove(tiles); }
                     }
                 });
             }
@@ -389,25 +441,29 @@ public class Viewer extends Application {
                 specialtile.getChildren().get(5).setOnMouseReleased(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        boardtile.getChildren().add(Tile.setspecialtile("S5",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum9));
-                        savetileandboard("S5",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum9);
-                        specialtile.getChildren().remove(5);
-                        specialtile.getChildren().add(5,Board.coverthetile(890,560));
+                        String tiles="S5"+Board.getboardplace(setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()))+sum9%8;
+                        boardstring.add(tiles);
+                        sum11++;
+                        if (RailroadInk.isValidPlacementSequence(savetileandboard())){
+                            boardtile.getChildren().add(Tile.setspecialtile("S5",setonboardx(mouseEvent.getSceneX()),setonboardy(mouseEvent.getSceneY()),sum9));
+                            specialblank.add(5);
+                            Tile.specialtileblank();
+                        }
+                        else{ boardstring.remove(tiles); }
                     }
                 });
             }
         });
     }
 
-    public void savetileandboard(String tile,double x,double y,int thesum){
-        tilestring.add(tile);
-        tilestring.add(Board.getboardplace(x,y));
-        tilestring.add(String.valueOf(thesum%8));
-        boardstring.add(tilestring.toString());
-        System.out.println(boardstring);
-        tilestring.clear();
-        sum11++;
+    public String savetileandboard(){
+        String ListString="";
+        for (String s:boardstring){
+            ListString+=s;
+        }
+        return ListString;
     }
+
 
     public void rotateimage(){
         /**@author Jiamin Dai u6801714
@@ -515,6 +571,7 @@ public class Viewer extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                specialtileblank1();
                 if (sum11>=3)
                     Tile.specialtileblank();
                 else{

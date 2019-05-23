@@ -1,5 +1,6 @@
 package comp1110.ass2;
 
+import com.sun.glass.ui.View;
 import comp1110.ass2.gui.Viewer;
 
 import java.awt.*;
@@ -167,11 +168,7 @@ public class RailroadInk {
      */
     public static boolean isValidPlacementSequence(String boardString) {
         // FIXME Task 6: determine whether the given placement sequence is valid
-        //List allTiles = Viewer.breakPlacementStringToPieces(boardString);
-        ArrayList<String> tilestring=new ArrayList<>();
-        for (int i=0;i<boardString.length()/5;i=i+5){
-            tilestring.add(boardString.substring(i,i+5));
-        }
+        int k=0;
         String[] board=new String[boardString.length()/5];
         for (int i=0,j=0;i<boardString.length();i=i+5,j++){
             board[j]=boardString.substring(i+2,i+4);
@@ -182,18 +179,20 @@ public class RailroadInk {
                     return false;
                 }
         }
+//        List allTiles = Viewer.breakPlacementStringToPieces(boardString);
+
+//
         if (isBoardStringWellFormed(boardString)){
             int amount = (boardString.length()/5);
-            char ro1 = boardString.charAt(2);
-            char co1 = boardString.charAt(3);
-            if (!((ro1=='A'&&co1=='1')||(ro1=='A'&&co1=='3')||(ro1=='A'&&co1=='5')||(ro1=='B'&&co1=='0')||(ro1=='B'&&co1=='6')||(ro1=='D'&&co1=='0')||(ro1=='D'&&co1=='6')||(ro1=='F'&&co1=='0')||(ro1=='F'&&co1=='6')||(ro1=='G'&&co1=='1')||(ro1=='G'&&co1=='3')||(ro1=='G'&&co1=='5'))){
+            String s=boardString.substring(2,4);
+            if (!(s.equals("A1")||s.equals("A3")||s.equals("A5")||s.equals("B0")||s.equals("B6")||s.equals("D0")||s.equals("D6")||s.equals("F0")||s.equals("F6")||s.equals("G1")||s.equals("G3")||s.equals("G5"))){
                 return false;
             }
+
               loop2:
                 for (int i = 0;i<(amount);i++){
                     loop1:
                     for (int j = i;j>=0;j--){
-
                             String tile1 = boardString.substring((0+i*5),(5+i*5));
                             String tile2 = boardString.substring((0+j*5),(5+j*5));
                             String con = Tile.tileReset(tile1);
@@ -246,12 +245,60 @@ public class RailroadInk {
                                         break loop1;
                                     }
                                 }
-                                else {
-                                    return false;
-                                }
+//                                else {
+//                                    return false;
+//                                }
                         }
                     }
                 }
+            String str1 = new String();
+            List<String> piece0 = Viewer.breakPlacementStringToPieces(boardString);
+            int tilenumber = boardString.length()/5;
+
+            String[] StrA = new String[tilenumber];
+            String[] StrB = new String[tilenumber];
+            String[] StrC = new String[tilenumber];
+            for (int i = 0; i<tilenumber;i++){
+                StrA[i] = piece0.get(i);
+                StrC[i] = piece0.get(i);
+                StrB[i] = "";
+            }
+            for (int i=0;i<tilenumber;i++){
+                for (int j=0;j<tilenumber;j++){
+                    char[] chars1 = StrA[i].toCharArray();
+                    char[] chars2 = StrC[j].toCharArray();
+                    String string1 = Tile.tileReset(StrA[i]);
+                    String string2 = Tile.tileReset(StrC[j]);
+                    if (areConnectedNeighbours(StrA[i],StrC[j])){
+
+                        if (chars1[2]==chars2[2]+1){
+                            if (string1.charAt(0)!=string2.charAt(2)) return false;
+                        }
+                        else if (chars1[2]==chars2[2]-1){
+                            if (string1.charAt(2)!=string2.charAt(0)) return false;
+                        }
+                        else if (chars1[3]==chars2[3]+1){
+                            if (string1.charAt(1)!=string2.charAt(3)) return false;
+                        }
+                        else {
+                            if (string1.charAt(3)!=string2.charAt(1)) return false;
+                        }
+
+                            StrB[i] = StrA[i];
+                            StrA[i] = "";
+
+                    }
+                    else if (IsConnectExit(StrA[i])){
+                        StrB[i]=StrA[i];
+                        StrA[i]="";
+                    }
+                }
+            }
+            for (int i=0;i<tilenumber;i++){
+                if (StrA[i]!=""){
+                    return false;
+                }
+            }
         }
 
 
