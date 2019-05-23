@@ -6,4 +6,4 @@ We declare that the work we have submitted for Stage G of this assignment and al
 
 * ....
 
-Signed: Jiamin Dai(u6801714), Bob Smith (u3456789), 
+Signed: Jiamin Dai(u6801714), Jesse Shen (u6718946),

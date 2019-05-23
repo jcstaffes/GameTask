@@ -21,7 +21,7 @@ public class RailroadInk {
      *
      * @param tilePlacementString a candidate tile placement string
      * @return true if the tile placement is well formed
-     * @author Jesse Shen_u6718946
+     * @author Jiamin Dai(u6801714)
      */
     public static boolean isTilePlacementWellFormed(String tilePlacementString) {
         // FIXME Task 2: determine whether a tile placement is well-formed
@@ -54,7 +54,7 @@ public class RailroadInk {
      *
      * @param boardString a board string describing the placement of one or more pieces
      * @return true if the board string is well-formed
-     * @author Jesse Shen_u6718946
+     * @author Jiamin Dai(u6801714)
      */
     public static boolean isBoardStringWellFormed(String boardString) {
         // FIXME Task 3: determine whether a board string is well-formed
@@ -97,6 +97,7 @@ public class RailroadInk {
      * areConnectedNeighbours("A0B30", "A3C23") would return false as these tiles are not neighbours.
      *
      * @return true if the placements are connected neighbours
+     * @author Jiamin Dai(u6801714)
      */
 
     /**
@@ -105,7 +106,6 @@ public class RailroadInk {
      *    2
      * **/
     public static boolean areConnectedNeighbours(String tilePlacementStringA, String tilePlacementStringB) {
-        //  @author Jiamin Dai(u6801714)
         if (tilePlacementStringA==""||tilePlacementStringB==""){
             return false;
         }

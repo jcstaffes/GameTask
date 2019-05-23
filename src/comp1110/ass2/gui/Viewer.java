@@ -77,6 +77,9 @@ public class Viewer extends Application {
 
     //TODO PLACE THIS METHOD INTO RAILROADINK
     //	Break placement string into piece strings for use
+    /**
+     * @author Jesse Shen(u6718946)
+    */
 
     //Turns ABCDEFGHIJ into ['ABCDE','FGHIJ']
     public static List breakPlacementStringToPieces(String placement) {
