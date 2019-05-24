@@ -475,8 +475,48 @@ public class RailroadInk {
                     for (int k=0;k<tilenumber;k++){
                         if (RailroadInk.areConnectedNeighbours(StrB[j], StrA[k])) {
                             if (RailroadInk.IsConnectExit(StrA[k])) {
-                                System.out.println(StrA[k]);
-                                ExitNum++;
+                                char[] charsB = StrB[j].toCharArray();
+                                char[] charsA = StrA[k].toCharArray();
+                                if (charsB[0]=='B'&&charsB[1]=='2'){
+                                    String string = Tile.tileReset(StrB[j]);
+                                    char[] chars2 = string.toCharArray();
+                                    char connectroad = 0;
+                                    if (charsB[2]==charsA[2]+1&&charsA[3]==charsB[3]) {
+                                        connectroad = chars2[0];
+                                    }
+                                    else if (charsB[3]==charsA[3]+1&&charsA[2]==charsB[2]) {
+                                        connectroad = chars2[1];
+                                    }
+                                    else if (charsB[2]==charsA[2]-1&&charsA[3]==charsB[3]) {
+                                        connectroad = chars2[2];
+                                    }
+                                    else if (charsB[3]==charsA[3]-1&&charsA[2]==charsB[2]) {
+                                        connectroad = chars2[3];
+                                    }
+                                    else {
+                                        connectroad = 'N';
+                                    }
+
+                                    for (int m=0;m<tilenumber;m++){
+                                        if (RailroadInk.IsConnectExit(StrB[m])){
+                                            char roadkind = 0;
+                                            char[] chars = StrB[m].toCharArray();
+                                            if ((chars[2]=='A'&&chars[3]=='1')||(chars[2]=='A'&&chars[3]=='5')||(chars[2]=='D'&&chars[3]=='0')||(chars[2]=='D'&&chars[3]=='6')||(chars[2]=='G'&&chars[3]=='5')||(chars[2]=='G'&&chars[3]=='1')){
+                                                roadkind = 'H';
+                                            }
+                                            else if ((chars[2]=='A'&&chars[3]=='3')||(chars[2]=='B'&&chars[3]=='0')||(chars[2]=='B'&&chars[3]=='6')||(chars[2]=='F'&&chars[3]=='0')||(chars[2]=='F'&&chars[3]=='6')||(chars[2]=='G'&&chars[3]=='3')){
+                                                roadkind = 'R';
+                                            }
+
+                                            if (roadkind==connectroad){
+                                                StrB[k] = StrA[k];
+                                                StrA[k] = "";
+                                                j=0;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             StrB[k] = StrA[k];
                             StrA[k] = "";
@@ -486,6 +526,11 @@ public class RailroadInk {
 
                      }
 
+                }
+                for (int h=0;h<tilenumber;h++){
+                    if (RailroadInk.IsConnectExit(StrB[h])){
+                        ExitNum++;
+                    }
                 }
                 score = score + 4 * (ExitNum - 1);
                 ExitNum = 0;
