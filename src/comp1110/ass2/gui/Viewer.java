@@ -613,7 +613,7 @@ public class Viewer extends Application {
                     r.setY(700);
                     text.getChildren().add(r);
                 } else{
-                    score.setText("Score:");
+                    score.setText("Score:"+RailroadInk.getBasicScore(savetileandboard()));
                     score.setX(50);
                     score.setY(720);
                     tiledice.getChildren().clear();

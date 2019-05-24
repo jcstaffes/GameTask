@@ -7,8 +7,6 @@ of our project implements the following features:
  X A basic playable game
  X A basic playable game that snaps pieces to the board and checks for validity (Task 7)
  X Generates basic starting piece placements (Task 8)
- - Implements hints (Task 10)
- - Implements interesting starting placements (Task 11)
 
 additional features...
-The game is basically palyable can can get part of basic score but fail to get the part of basic score that means number of exits connected..
+The game is basically palyable and can get part of basic score, but failed to get the correct part of basic score that means number of exits connected.
