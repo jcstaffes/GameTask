@@ -600,7 +600,6 @@ public class Viewer extends Application {
                 ArrayList<String> dice=new ArrayList<>();
                 dice=Tile.generateTile(RailroadInk.generateDiceRoll());
                 d=dice;
-                System.out.println(dice);
                 for (int i=0;i<4;i++){
                     tiledice.getChildren().add(Tile.rotateImageinDice(dice.get(i),100+110*i));
                 }
@@ -617,6 +616,7 @@ public class Viewer extends Application {
                     score.setX(50);
                     score.setY(720);
                     tiledice.getChildren().clear();
+                    Tile.specialtileblank();
                 }
             }
         });
